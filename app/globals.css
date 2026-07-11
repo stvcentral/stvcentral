@@ -284,3 +284,205 @@ main { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
   .player-content { grid-template-columns:3rem 1fr auto auto; }
   .player-content audio { grid-column:1 / -1; }
 }
+
+/* Refined Royal Chaos placeholders */
+.collection-page {
+  width: min(1480px, calc(100% - 2rem));
+}
+
+.collection-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.collection-heading h1 {
+  margin: .3rem 0;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: -.05em;
+}
+
+.collection-heading p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.refined-grid {
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 1.15rem;
+}
+
+.refined-tile {
+  border-color: rgba(213,162,75,.34);
+  background: linear-gradient(145deg, #171717, #101010);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.refined-tile:hover {
+  transform: translateY(-4px);
+  border-color: rgba(213,162,75,.85);
+  box-shadow: 0 18px 45px rgba(0,0,0,.35);
+}
+
+.tile-artwork {
+  width: 100%;
+  aspect-ratio: 5 / 7;
+  object-fit: cover;
+}
+
+.tile-copy {
+  padding: 1.2rem !important;
+}
+
+.tile-copy h2 {
+  min-height: 2.7em;
+  font-size: 1.22rem;
+  line-height: 1.25;
+}
+
+.tile-card-name {
+  color: var(--gold) !important;
+  font-weight: 700;
+}
+
+.tile-meta {
+  min-height: 1.5em;
+  font-size: .92rem;
+}
+
+.view-song {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding: .7rem .85rem;
+  border: 1px solid var(--line);
+  border-radius: .55rem;
+  font-size: .82rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.view-song b {
+  color: var(--gold);
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.playing-card-placeholder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 7;
+  overflow: hidden;
+  border: 1px solid rgba(213,162,75,.35);
+  border-radius: 1rem;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(213,162,75,.14), transparent 38%),
+    linear-gradient(145deg, #1b1b1b, #0d0d0d 72%);
+  box-shadow: inset 0 0 38px rgba(0,0,0,.36);
+}
+
+.playing-card-placeholder.compact {
+  border: 0;
+  border-radius: 0;
+}
+
+.card-corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .05rem;
+  z-index: 2;
+}
+
+.card-corner.top {
+  top: 1rem;
+  left: 1rem;
+}
+
+.card-corner.bottom {
+  right: 1rem;
+  bottom: 1rem;
+  transform: rotate(180deg);
+}
+
+.card-rank {
+  font-size: clamp(1.45rem, 4vw, 2.2rem);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.card-suit-small {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  line-height: 1;
+}
+
+.card-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.card-suit-large {
+  font-size: clamp(8rem, 19vw, 13rem);
+  line-height: 1;
+  filter: drop-shadow(0 8px 28px rgba(213,162,75,.22));
+}
+
+.card-rank-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -53%);
+  color: #111;
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 950;
+  text-shadow: 0 1px 0 rgba(255,255,255,.2);
+}
+
+.suit-hearts,
+.suit-diamonds {
+  color: #e04d4d;
+}
+
+.suit-spades,
+.suit-clubs,
+.suit-jokers {
+  color: var(--gold);
+}
+
+.song-hero > .playing-card-placeholder {
+  max-width: 520px;
+  justify-self: center;
+  box-shadow: 0 24px 80px rgba(0,0,0,.55);
+}
+
+@media (max-width: 650px) {
+  .refined-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .65rem;
+  }
+
+  .tile-copy {
+    padding: .85rem !important;
+  }
+
+  .tile-copy h2 {
+    font-size: .98rem;
+  }
+
+  .tile-meta,
+  .tile-card-name {
+    font-size: .78rem;
+  }
+
+  .view-song {
+    display: none;
+  }
+}
