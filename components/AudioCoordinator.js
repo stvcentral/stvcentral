@@ -4,20 +4,25 @@ import { useEffect } from "react";
 
 export default function AudioCoordinator() {
   useEffect(() => {
-    function handlePlay(event) {
-      const active = event.target;
-      document.querySelectorAll("audio").forEach((audio) => {
-        if (audio !== active && !audio.paused) {
-          audio.pause();
+    function stopOtherPlayers(event) {
+      const activePlayer = event.target;
+
+      if (!(activePlayer instanceof HTMLMediaElement)) {
+        return;
+      }
+
+      document.querySelectorAll("audio, video").forEach((player) => {
+        if (player !== activePlayer && !player.paused) {
+          player.pause();
         }
       });
     }
 
-    const audios = Array.from(document.querySelectorAll("audio"));
-    audios.forEach((audio) => audio.addEventListener("play", handlePlay));
+    // "play" does not bubble normally, so capture it at document level.
+    document.addEventListener("play", stopOtherPlayers, true);
 
     return () => {
-      audios.forEach((audio) => audio.removeEventListener("play", handlePlay));
+      document.removeEventListener("play", stopOtherPlayers, true);
     };
   }, []);
 

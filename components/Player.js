@@ -33,7 +33,7 @@ export default function Player({ song }) {
           {current.audio ? (
             <>
               <button className="skip-button" onClick={() => playAt(currentIndex - 1)}>‹</button>
-              <audio key={current.audio} ref={audioRef} controls autoPlay preload="metadata"
+              <audio key={current.audio} ref={audioRef} controls preload="metadata"
                 src={current.audio} onEnded={() => playAt(currentIndex + 1)} />
               <button className="skip-button" onClick={() => playAt(currentIndex + 1)}>›</button>
             </>
