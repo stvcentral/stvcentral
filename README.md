@@ -1,13 +1,25 @@
 # STV Central
 
-Welcome to the official STV Central project.
+This is the first working STV Central website package.
 
-This repository contains the source code for https://stvcentral.com
+## Current content
 
-The first objective is simple:
+- Home page
+- Discography
+- Reusable permanent song-page system
+- First song: `2 Voices, 1 Fire`
+- Web-ready artwork and MP3 audio
+- Collapsible side player
 
-- Build the website
-- Publish the first 54 song pages
-- Print the physical album cards with permanent QR codes
+## Permanent first-song URL
 
-Everything else grows from there.
+`/song/2voices1fire`
+
+After the custom domain is connected:
+
+`https://stvcentral.com/song/2voices1fire`
+
+## Deploy
+
+Upload every file and folder in this package to the GitHub website repository.
+Vercel will automatically rebuild the project.
