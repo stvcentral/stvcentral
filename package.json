@@ -1,10 +1,10 @@
 {
   "name": "stvcentral",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm install --no-save typescript @types/node @types/react @types/react-dom",
+    "prebuild": "node scripts/cleanup-typescript.mjs",
     "build": "next build",
     "start": "next start"
   },
