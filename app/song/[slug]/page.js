@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import Player from "../../../components/Player";
 import { CardVisual } from "../../../components/CardVisual";
+import CardReveal from "../../../components/CardReveal";
+import EnergeticValue from "../../../components/EnergeticValue";
 import { getSong, songs } from "../../../data/songs";
 
 export function generateStaticParams() {
@@ -18,9 +20,13 @@ export default async function SongPage({ params }) {
 
   return (
     <>
+      <CardReveal song={song} />
       <main className="song-page">
         <section className="song-hero">
-          {song.artwork ? <img className="song-artwork" src={song.artwork} alt={`${song.title} artwork`} /> : <CardVisual song={song} />}
+          <div className="song-card-stage">
+            {song.artwork ? <img className="song-artwork" src={song.artwork} alt={`${song.title} artwork`} /> : <CardVisual song={song} />}
+            <div className="song-energy-hotspot"><EnergeticValue value={song.energeticValue} compact /></div>
+          </div>
           <div className="song-summary">
             <p className="eyebrow">STV SONG CARD · {song.cardName.toUpperCase()}</p>
             <h1>{song.title}</h1>

@@ -115,6 +115,7 @@ export default function AdminPage() {
             bpm: Number(song.bpm),
             musicalKey: song.musicalKey,
             duration: song.duration,
+            energeticValue: song.energeticValue ? Number(song.energeticValue) : null,
             why: song.why || "",
             lyrics: textToLyrics(lyricsText),
           },
@@ -286,6 +287,11 @@ export default function AdminPage() {
             <label>
               Duration
               <input value={song.duration} onChange={(e) => updateField("duration", e.target.value)} />
+            </label>
+            <label>
+              Creative Energetic Value
+              <input type="number" value={song.energeticValue || ""} placeholder="KWK"
+                onChange={(e) => updateField("energeticValue", e.target.value)} />
             </label>
             <label className="studio-wide">
               Why this song exists

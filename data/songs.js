@@ -13,7 +13,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-H-04",
@@ -29,7 +30,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-H-10",
@@ -45,7 +47,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-H-11",
@@ -61,7 +64,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-H-02",
@@ -77,7 +81,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-H-03",
@@ -161,7 +166,8 @@ export const songs = [
           "Yeah, better when we’re singin’ together"
         ]
       }
-    ]
+    ],
+    "energeticValue": 4700
   },
   {
     "id": "RC-H-13",
@@ -177,7 +183,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-H-08",
@@ -193,7 +200,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-H-09",
@@ -209,7 +217,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-H-01",
@@ -225,7 +234,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-H-07",
@@ -241,7 +251,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-H-06",
@@ -257,7 +268,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-H-12",
@@ -273,7 +285,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-02",
@@ -289,7 +302,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-03",
@@ -305,7 +319,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-04",
@@ -321,7 +336,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-12",
@@ -337,7 +353,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-10",
@@ -353,7 +370,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-08",
@@ -369,7 +387,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-11",
@@ -385,7 +404,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-05",
@@ -401,7 +421,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-07",
@@ -417,7 +438,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-09",
@@ -433,7 +455,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-06",
@@ -449,7 +472,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-01",
@@ -465,7 +489,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-P-13",
@@ -481,7 +506,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-13",
@@ -497,7 +523,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-02",
@@ -513,7 +540,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-09",
@@ -529,7 +557,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-11",
@@ -545,7 +574,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-05",
@@ -561,7 +591,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-07",
@@ -577,7 +608,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-04",
@@ -593,7 +625,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-01",
@@ -609,7 +642,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-08",
@@ -625,7 +659,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-12",
@@ -641,7 +676,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-03",
@@ -657,7 +693,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-10",
@@ -673,7 +710,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-D-06",
@@ -689,7 +727,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-11",
@@ -705,7 +744,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-10",
@@ -721,7 +761,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-05",
@@ -737,7 +778,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-04",
@@ -753,7 +795,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-12",
@@ -769,7 +812,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-06",
@@ -785,7 +829,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-13",
@@ -801,7 +846,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-08",
@@ -817,7 +863,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-03",
@@ -833,7 +880,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-02",
@@ -849,7 +897,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-07",
@@ -865,7 +914,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-01",
@@ -881,7 +931,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-T-09",
@@ -897,7 +948,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-JOKER-01",
@@ -913,7 +965,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   },
   {
     "id": "RC-JOKER-02",
@@ -929,7 +982,8 @@ export const songs = [
     "artwork": null,
     "audio": null,
     "why": "",
-    "lyrics": []
+    "lyrics": [],
+    "energeticValue": null
   }
 ];
 

@@ -27,6 +27,7 @@ export async function POST(request) {
       bpm: Number(patch.bpm),
       musicalKey: patch.musicalKey,
       duration: patch.duration,
+      energeticValue: patch.energeticValue ? Number(patch.energeticValue) : null,
       why: patch.why || "",
       lyrics: Array.isArray(patch.lyrics) ? patch.lyrics : [],
     };

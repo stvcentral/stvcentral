@@ -31,6 +31,16 @@ export default function AdminPage() {
           </div>
         </Link>
 
+
+        <Link href="/admin/reveals" className="private-hub-card">
+          <span className="private-hub-icon">⚡</span>
+          <div>
+            <p className="eyebrow">PROTOTYPES</p>
+            <h2>Reveal Lab</h2>
+            <p>Preview the slammer, meteor booster, and 54-card earthquake.</p>
+          </div>
+        </Link>
+
         <div className="private-hub-card disabled">
           <span className="private-hub-icon">◉</span>
           <div>
