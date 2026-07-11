@@ -30,7 +30,7 @@ export default async function SongPage({ params }) {
               <div><dt>Length</dt><dd>{song.duration}</dd></div>
               <div><dt>Permanent URL</dt><dd>stvcentral.com/song/{song.slug}</dd></div>
             </dl>
-            {song.audio ? <audio className="main-audio" controls autoPlay preload="metadata" src={song.audio} /> :
+            {song.audio ? <audio className="main-audio" controls preload="metadata" src={song.audio} /> :
               <div className="coming-soon">This permanent page is ready for its QR code. Audio will be added here.</div>}
           </div>
         </section>
