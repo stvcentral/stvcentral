@@ -1,10 +1,9 @@
 {
   "name": "stvcentral",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/cleanup-typescript.mjs",
     "build": "next build",
     "start": "next start"
   },

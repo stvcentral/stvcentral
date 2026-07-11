@@ -1,55 +1,23 @@
 import Link from "next/link";
-import { songs } from "@/data/songs";
-
+import { songs } from "../data/songs";
 export default function Home() {
-  const featured = songs[0];
-
+  const featured = songs.find(song => song.slug === "2voices1fire") || songs[0];
   return (
     <main>
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">THE PHYSICAL ALBUM, REIMAGINED</p>
+          <p className="eyebrow">ROYAL CHAOS · 54 SONG-CARD ALBUM</p>
           <h1>Music with a permanent home.</h1>
-          <p>
-            Every STV song card opens a living page containing the song,
-            its story, lyrics, and everything added to it over time.
-          </p>
+          <p>Each physical card points directly to its song inside the album playlist.</p>
           <div className="actions">
-            <Link className="button primary" href={`/song/${featured.slug}`}>
-              Play latest song
-            </Link>
-            <Link className="button secondary" href="/music">
-              View discography
-            </Link>
+            <Link className="button primary" href={`/song/${featured.slug}`}>Play featured song</Link>
+            <Link className="button secondary" href="/music">View all 54 songs</Link>
           </div>
         </div>
-
         <Link href={`/song/${featured.slug}`} className="featured-card">
           <img src={featured.artwork} alt={`${featured.title} artwork`} />
-          <div>
-            <span>Featured release</span>
-            <strong>{featured.title}</strong>
-          </div>
+          <div><span>Featured release</span><strong>{featured.title}</strong></div>
         </Link>
-      </section>
-
-      <section className="home-grid">
-        <article id="shop">
-          <p className="eyebrow">SHOP</p>
-          <h2>Physical song-card albums</h2>
-          <p>The cards are the album—not an accessory to it.</p>
-          <span className="status">Store opening soon</span>
-        </article>
-        <article id="about">
-          <p className="eyebrow">ABOUT</p>
-          <h2>Why STV Central exists</h2>
-          <p>A permanent place where Vincent’s artistic output can live and thrive.</p>
-        </article>
-        <article id="contact">
-          <p className="eyebrow">CONTACT</p>
-          <h2>Collaborations, sponsors and shows</h2>
-          <p>Contact details will be added before public release.</p>
-        </article>
       </section>
     </main>
   );
