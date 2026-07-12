@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -65,6 +64,106 @@ function NumberField({ label, value, onChange, step="any", min=0, help, disabled
   );
 }
 
+function AbacusRow({ label, value, max, display, tone="gold", animationKey }) {
+  const normalized = max <= 0 ? 0 : Math.min(1, Math.abs(value) / max);
+  const moved = Math.max(0, Math.min(10, Math.round(normalized * 10)));
+  return (
+    <div className={`abacus-row tone-${tone}`} key={`${label}-${animationKey}`}>
+      <div className="abacus-label">
+        <span>{label}</span>
+        <strong>{display}</strong>
+      </div>
+      <div className="abacus-rail" aria-label={`${label}: ${display}`}>
+        {Array.from({ length: 10 }).map((_, index) => (
+          <span
+            key={index}
+            className={`abacus-bead ${index < moved ? "is-counted" : ""}`}
+            style={{ "--delay": `${index * 34}ms` }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MedievalAbacus({ values, humanEnergy, presence, hours, coefficient, creatorAdjustment, currency, rate }) {
+  const animationKey = [humanEnergy, presence, hours, values.finalValue, creatorAdjustment].join("-");
+  const max = Math.max(values.human, values.location, values.materialEnergy, values.machines, Math.abs(creatorAdjustment), 1);
+  return (
+    <div className="royal-abacus" key={animationKey}>
+      <div className="abacus-crown" aria-hidden="true">♔</div>
+      <div className="abacus-title">
+        <span>ROYAL COUNTING FRAME</span>
+        <small>Every bead follows the same calculator engine.</small>
+      </div>
+      <div className="abacus-frame">
+        <AbacusRow label="Human energy" value={values.human} max={max} display={`${values.human.toFixed(2)} KWK`} tone="ruby" animationKey={animationKey} />
+        <AbacusRow label="Machines" value={values.machines} max={max} display={`${values.machines.toFixed(2)} KWK`} tone="steel" animationKey={animationKey} />
+        <AbacusRow label="Location" value={values.location} max={max} display={`${values.location.toFixed(2)} KWK`} tone="emerald" animationKey={animationKey} />
+        <AbacusRow label="Materials" value={values.materialEnergy} max={max} display={`${values.materialEnergy.toFixed(2)} KWK`} tone="amber" animationKey={animationKey} />
+        <AbacusRow label="Creator adjustment" value={creatorAdjustment} max={max} display={`${creatorAdjustment >= 0 ? "+" : ""}${creatorAdjustment.toFixed(2)} KWK`} tone="violet" animationKey={animationKey} />
+        <AbacusRow label="Final value" value={values.finalValue} max={values.finalValue || 1} display={`${Math.round(values.finalValue).toLocaleString()} KWK`} tone="final" animationKey={animationKey} />
+      </div>
+      <div className="royal-seal">
+        <span>ESTIMATED</span>
+        <strong>⚡ {Math.round(values.finalValue).toLocaleString()} KWK</strong>
+        <small>{values.localEquivalent.toFixed(2)} {currency} at {rate.toFixed(5)} {currency}/kWh</small>
+      </div>
+      <p className="abacus-equation">
+        {humanEnergy.toFixed(2)} kWh/h × {presence.toFixed(2)} presence × {hours.toFixed(2)} h × {coefficient}
+        <br />
+        + machines + location + materials + adjustment
+      </p>
+    </div>
+  );
+}
+
+function EnergyFoundation({ jobPreset, values, humanEnergy, presence, hours, coefficient }) {
+  return (
+    <details className="energy-foundation">
+      <summary>🔬 Foundation — follow the energy</summary>
+      <p className="foundation-intro">
+        <strong>KingdomWatt (KWK) is a unit of creative accounting built on the constant laws of physics.</strong>
+        The amount of energy required to create something can always be expressed as physical energy (Joules or kilowatt-hours).
+        Those units never change. One kilowatt-hour today is the same physical quantity as one kilowatt-hour a thousand years from now or across all regions.
+        What changes is the human value assigned to that energy and the local cost of producing or purchasing it.
+      </p>
+      <div className="foundation-table" role="table" aria-label="Live KingdomWatt energy chain">
+        <div className="foundation-head" role="row">
+          <span>Stage</span><span>Live value</span><span>Equation</span>
+        </div>
+        <div role="row"><strong>Creative work</strong><span>{jobPreset}</span><code>Selected preset</code></div>
+        <div role="row"><strong>Human energy rate</strong><span>{humanEnergy.toFixed(3)} kWh/h</span><code>Editable biological estimate</code></div>
+        <div role="row"><strong>Presence-adjusted energy</strong><span>{values.humanPhysicalKWh.toFixed(4)} kWh</span><code>{humanEnergy.toFixed(3)} × {presence.toFixed(2)} × {hours.toFixed(2)}</code></div>
+        <div role="row"><strong>Joules</strong><span>{Math.round(values.humanJoules).toLocaleString()} J</span><code>{values.humanPhysicalKWh.toFixed(4)} × 3,600,000</code></div>
+        <div role="row"><strong>Watt-hours</strong><span>{values.humanWh.toLocaleString(undefined, { maximumFractionDigits: 2 })} Wh</span><code>{values.humanPhysicalKWh.toFixed(4)} × 1,000</code></div>
+        <div role="row"><strong>Kilowatt-hours</strong><span>{values.humanPhysicalKWh.toFixed(4)} kWh</span><code>Physical energy foundation</code></div>
+        <div role="row"><strong>Kingdom accounting</strong><span>× {coefficient}</span><code>Locked human–industrial coefficient</code></div>
+        <div className="foundation-total" role="row"><strong>Human KWK</strong><span>{values.human.toFixed(2)} KWK</span><code>{values.humanPhysicalKWh.toFixed(4)} × {coefficient}</code></div>
+      </div>
+      <small className="foundation-note">Calculator automatically multiplies the hourly human and machine values by Hours Deployed.</small>
+    </details>
+  );
+}
+
+function BuddyReaction({ enabled, values, hours }) {
+  if (!enabled) return null;
+  let line = "Watching the beads...";
+  if (hours >= 12) line = "That is a heroic number of hours.";
+  if (values.finalValue >= 5000) line = "That ledger is getting heavy.";
+  if (values.finalValue >= 10000) line = "This one deserves a dramatic reveal.";
+  return (
+    <div className="buddy-reaction" aria-live="polite">
+      <div className="buddy-placeholder" aria-hidden="true">⚡</div>
+      <div>
+        <strong>Buddy reaction layer</strong>
+        <p>{line}</p>
+        <small>Replace this placeholder with a finished Mic Buddy asset later.</small>
+      </div>
+    </div>
+  );
+}
+
 export default function KingdomWattCalculator() {
   const [jobPreset, setJobPreset] = useState("Music production");
   const [humanPreset, setHumanPreset] = useState("Creative work");
@@ -79,18 +178,23 @@ export default function KingdomWattCalculator() {
   const [rate, setRate] = useState(0.06483);
   const [currency, setCurrency] = useState("CAD");
   const [creatorAdjustment, setCreatorAdjustment] = useState(0);
+  const [skin, setSkin] = useState("digital");
+  const [buddyEnabled, setBuddyEnabled] = useState(false);
 
   useEffect(() => {
     const savedRate = Number(localStorage.getItem("kwk-local-rate"));
     const savedCurrency = localStorage.getItem("kwk-local-currency");
+    const savedSkin = localStorage.getItem("kwk-calculator-skin");
     if (Number.isFinite(savedRate) && savedRate > 0) setRate(savedRate);
     if (savedCurrency) setCurrency(savedCurrency);
+    if (["digital", "medieval"].includes(savedSkin)) setSkin(savedSkin);
   }, []);
 
   useEffect(() => {
     if (rate > 0) localStorage.setItem("kwk-local-rate", String(rate));
     localStorage.setItem("kwk-local-currency", currency);
-  }, [rate, currency]);
+    localStorage.setItem("kwk-calculator-skin", skin);
+  }, [rate, currency, skin]);
 
   const machineLibraryTotal = useMemo(() =>
     selectedMachines.reduce((sum, id) => {
@@ -101,13 +205,16 @@ export default function KingdomWattCalculator() {
   const values = useMemo(() => {
     const safeRate = rate > 0 ? rate : 0.00001;
     const effectiveMachineRate = machinePerHour + machineLibraryTotal;
-    const human = humanEnergy * presence * coefficient * hours;
+    const humanPhysicalKWh = humanEnergy * presence * hours;
+    const humanJoules = humanPhysicalKWh * 3600000;
+    const humanWh = humanPhysicalKWh * 1000;
+    const human = humanPhysicalKWh * coefficient;
     const machines = effectiveMachineRate * hours;
     const location = (locationPerHour / safeRate) * hours;
     const materialEnergy = materials / safeRate;
     const estimated = human + machines + location + materialEnergy;
     const finalValue = Math.max(0, estimated + creatorAdjustment);
-    return { human, machines, location, materialEnergy, estimated, finalValue, effectiveMachineRate, localEquivalent: finalValue * safeRate };
+    return { humanPhysicalKWh, humanJoules, humanWh, human, machines, location, materialEnergy, estimated, finalValue, effectiveMachineRate, localEquivalent: finalValue * safeRate };
   }, [humanEnergy, presence, hours, machinePerHour, machineLibraryTotal, locationPerHour, materials, rate, creatorAdjustment]);
 
   function applyJobPreset(name) {
@@ -127,11 +234,17 @@ export default function KingdomWattCalculator() {
   }
 
   return (
-    <main className="kwk-calculator-shell">
+    <main className={`kwk-calculator-shell skin-${skin}`}>
       <header className="kwk-calculator-hero">
         <p className="eyebrow">KINGDOMWATT</p>
         <h1>Creative Energetic Value Calculator</h1>
         <p>Estimate the human, machine, location, and material energy deployed to create a song, service, or physical result.</p>
+        <div className="calculator-skin-switch" role="group" aria-label="Calculator skin">
+          <span>Calculator skin</span>
+          <button className={skin === "digital" ? "active" : ""} onClick={() => setSkin("digital")}>Digital</button>
+          <button className={skin === "medieval" ? "active" : ""} onClick={() => setSkin("medieval")}>Medieval Abacus</button>
+          <label className="buddy-toggle"><input type="checkbox" checked={buddyEnabled} onChange={(e) => setBuddyEnabled(e.target.checked)} /> Buddy reactions</label>
+        </div>
       </header>
 
       <div className="kwk-calculator-layout">
@@ -235,26 +348,36 @@ export default function KingdomWattCalculator() {
               <small>Examples: CAD, USD, EUR.</small>
             </label>
           </div>
+
+          <EnergyFoundation jobPreset={jobPreset} values={values} humanEnergy={humanEnergy} presence={presence} hours={hours} coefficient={coefficient} />
         </section>
 
         <aside className="kwk-result-panel">
-          <p className="eyebrow">ESTIMATED CREATIVE ENERGY VALUE</p>
-          <h2>⚡ {Math.round(values.finalValue).toLocaleString()} KWK</h2>
-          <blockquote>“This work cost me {Math.round(values.finalValue).toLocaleString()} KWK of my life to make.”</blockquote>
-          <dl className="kwk-breakdown">
-            <div><dt>Human</dt><dd>{values.human.toFixed(2)} KWK</dd></div>
-            <div><dt>Machines</dt><dd>{values.machines.toFixed(2)} KWK</dd></div>
-            <div><dt>Location</dt><dd>{values.location.toFixed(2)} KWK</dd></div>
-            <div><dt>Materials</dt><dd>{values.materialEnergy.toFixed(2)} KWK</dd></div>
-            <div><dt>Estimated subtotal</dt><dd>{values.estimated.toFixed(2)} KWK</dd></div>
-            <div><dt>King's / creator's adjustment</dt><dd>{creatorAdjustment.toFixed(2)} KWK</dd></div>
-          </dl>
-          <div className="kwk-local-result">
-            <span>Estimated value in your local energy market</span>
-            <strong>{values.localEquivalent.toFixed(2)} {currency}</strong>
-            <small>{rate.toFixed(5)} {currency} per kWh</small>
-          </div>
-          <p className="kwk-note">KWK remains the unit of account. Local currency is only the visitor’s local expression of that energy.</p>
+          {skin === "medieval" ? (
+            <MedievalAbacus values={values} humanEnergy={humanEnergy} presence={presence} hours={hours} coefficient={coefficient} creatorAdjustment={creatorAdjustment} currency={currency} rate={rate} />
+          ) : (
+            <>
+              <p className="eyebrow">ESTIMATED CREATIVE ENERGY VALUE</p>
+              <h2>⚡ {Math.round(values.finalValue).toLocaleString()} KWK</h2>
+              <blockquote>“This work cost me {Math.round(values.finalValue).toLocaleString()} KWK of my life to make.”</blockquote>
+              <dl className="kwk-breakdown">
+                <div><dt>Human physical energy</dt><dd>{values.humanPhysicalKWh.toFixed(4)} kWh</dd></div>
+                <div><dt>Human creative accounting</dt><dd>{values.human.toFixed(2)} KWK</dd></div>
+                <div><dt>Machines</dt><dd>{values.machines.toFixed(2)} KWK</dd></div>
+                <div><dt>Location</dt><dd>{values.location.toFixed(2)} KWK</dd></div>
+                <div><dt>Materials</dt><dd>{values.materialEnergy.toFixed(2)} KWK</dd></div>
+                <div><dt>Estimated subtotal</dt><dd>{values.estimated.toFixed(2)} KWK</dd></div>
+                <div><dt>King's / creator's adjustment</dt><dd>{creatorAdjustment.toFixed(2)} KWK</dd></div>
+              </dl>
+              <div className="kwk-local-result">
+                <span>Estimated value in your local energy market</span>
+                <strong>{values.localEquivalent.toFixed(2)} {currency}</strong>
+                <small>{rate.toFixed(5)} {currency} per kWh</small>
+              </div>
+              <p className="kwk-note">KWK remains the unit of account. Local currency is only the visitor’s local expression of that energy.</p>
+            </>
+          )}
+          <BuddyReaction enabled={buddyEnabled} values={values} hours={hours} />
         </aside>
       </div>
     </main>
