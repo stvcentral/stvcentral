@@ -294,8 +294,17 @@ export default function KingdomWattCalculator() {
             <NumberField label="Human–Industrial Coefficient" value={coefficient} onChange={() => {}}
               disabled help="625 is a locked Kingdom constant."
               info={<>
-                <strong>Kingdom Constant</strong>
-                <span>This translates biological human energy into the Kingdom ledger. It is part of the Kingdom standard and cannot be changed.</span>
+                <strong>Why is the coefficient 625?</strong>
+                <span>The Kingdom believes that one hour of routine, honest contribution should be worth enough to feed one adult for one day.</span>
+                <span>At normal Presence (P = 0.5):</span>
+                <code>0.6 × 0.5 × 625 = 187.5 KW₭</code>
+                <span>Using the calculator’s rounded Québec launch reference of about $0.08 CAD per kWh:</span>
+                <code>187.5 KW₭ ≈ $15 CAD</code>
+                <span>That is close to one adult day of basic home-prepared food and almost the price of two Canadian Big Macs.</span>
+                <span>Historical studies also show that, in some places and periods, about one gram of silver could represent one day of basic subsistence.</span>
+                <span>These comparisons do not make 625 a law of nature. They show why the Kingdom chose it as a human-dignity standard: one normal hour of contribution should renew one person’s basic nourishment for one day.</span>
+                <span>625 is not random. It connects routine contribution to one day of nourishment.</span>
+                <small>The dollar amount is a comparison only—not a wage promise, cash value, silver peg, or redemption guarantee.</small>
               </>} />
 
             <NumberField label="Hours deployed" value={hours} onChange={setHours} step="0.25"
