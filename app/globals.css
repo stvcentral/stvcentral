@@ -1257,3 +1257,13 @@ main { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
 .buddy-reaction small{color:var(--muted);font-size:.65rem}
 .skin-medieval .kwk-result-panel{background:transparent;border:0;padding:0;box-shadow:none}
 @media(max-width:760px){.foundation-table>div{grid-template-columns:1fr}.foundation-head{display:none!important}.buddy-toggle{width:100%;justify-content:center;border-left:0;padding-left:0}.abacus-label{font-size:.67rem}.abacus-bead{width:12px;margin-right:2px}.abacus-frame{padding:.7rem}}
+
+/* KingdomWatt Project Calculator vNext */
+.kwk-project-card{display:grid;gap:.85rem;margin-bottom:1rem;padding:1rem;border:1px solid rgba(213,162,75,.45);border-radius:.85rem;background:rgba(213,162,75,.05)}
+.kwk-project-card .eyebrow{margin:0}.kwk-field textarea{width:100%;resize:vertical;border:1px solid var(--line);border-radius:.6rem;background:#0c0c0c;color:var(--text);padding:.8rem;font:inherit}
+.kwk-machine-mode{display:flex;gap:.5rem;margin-bottom:.8rem}.kwk-machine-mode button,.kwk-rate-card button,.kwk-ledger-actions button,.kwk-finalized-card button{border:1px solid var(--line);border-radius:.6rem;background:#111;color:var(--text);padding:.7rem .9rem;font-weight:850;cursor:pointer}.kwk-machine-mode button.active{border-color:var(--gold);color:var(--gold);background:rgba(213,162,75,.08)}
+.kwk-rate-card{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.9rem;border:1px solid var(--line);border-radius:.75rem;background:#0e0e0e;margin-bottom:.5rem}.kwk-rate-card>div{display:grid;gap:.15rem}.kwk-rate-card span,.kwk-rate-card small,.kwk-rate-status{color:var(--muted)}.kwk-rate-status{font-size:.82rem;margin:.35rem 0 .8rem}
+.kwk-ledger-actions{display:grid;gap:.45rem;margin-top:1rem}.kwk-primary-action{background:var(--gold)!important;color:#090909!important;border-color:var(--gold)!important;font-size:1rem}.kwk-ledger-actions small{color:var(--muted);line-height:1.4}
+.kwk-finalized-card{display:grid;gap:.55rem;margin-top:1rem;padding:1rem;border:1px solid rgba(213,162,75,.45);border-radius:.8rem;background:#0c0c0c}.kwk-finalized-card>strong{font-size:1.1rem}.kwk-finalized-card>span{color:var(--gold);font-weight:900;font-size:1.35rem}.kwk-finalized-card>small{color:var(--muted)}
+.kwk-review{display:grid;gap:.45rem;padding:.75rem;border:1px solid var(--line);border-radius:.65rem;background:#111}.kwk-review>div{display:flex;justify-content:space-between}.kwk-review p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.4}.kwk-review small{color:#aaa;line-height:1.4}
+@media(max-width:650px){.kwk-rate-card{align-items:stretch;flex-direction:column}.kwk-machine-mode{flex-direction:column}}

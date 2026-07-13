@@ -41,6 +41,19 @@ const MACHINE_LIBRARY = [
   ["hvac", "Heating / cooling share", 0.50],
 ];
 
+const REGIONAL_RATE_REFERENCES = {
+  "Quebec, Canada": { rate: 0.06483, currency: "CAD", source: "Hydro-Québec reference", confidence: "Regional reference" },
+  "Ontario, Canada": { rate: 0.12, currency: "CAD", source: "Ontario Energy Board tiered reference", confidence: "Regional reference" },
+  "British Columbia, Canada": { rate: 0.1187, currency: "CAD", source: "BC residential Step 1 reference", confidence: "Regional reference" },
+};
+
+function detectSupportedRegion(latitude, longitude) {
+  if (latitude >= 44 && latitude <= 63 && longitude >= -80 && longitude <= -57) return "Quebec, Canada";
+  if (latitude >= 41 && latitude <= 57 && longitude >= -96 && longitude < -74) return "Ontario, Canada";
+  if (latitude >= 48 && latitude <= 60 && longitude >= -139 && longitude <= -114) return "British Columbia, Canada";
+  return null;
+}
+
 function InfoTip({ children }) {
   return (
     <span className="kwk-info-tip" tabIndex="0">
@@ -101,6 +114,7 @@ function MedievalAbacus({ values, humanEnergy, presence, hours, coefficient, cre
         <AbacusRow label="Machines" value={values.machines} max={max} display={`${values.machines.toFixed(2)} KWK`} tone="steel" animationKey={animationKey} />
         <AbacusRow label="Location" value={values.location} max={max} display={`${values.location.toFixed(2)} KWK`} tone="emerald" animationKey={animationKey} />
         <AbacusRow label="Materials" value={values.materialEnergy} max={max} display={`${values.materialEnergy.toFixed(2)} KWK`} tone="amber" animationKey={animationKey} />
+        <AbacusRow label="External investment" value={values.externalInvestmentEnergy} max={max} display={`${values.externalInvestmentEnergy.toFixed(2)} KWK`} tone="emerald" animationKey={animationKey} />
         <AbacusRow label="Creator adjustment" value={creatorAdjustment} max={max} display={`${creatorAdjustment >= 0 ? "+" : ""}${creatorAdjustment.toFixed(2)} KWK`} tone="violet" animationKey={animationKey} />
         <AbacusRow label="Final value" value={values.finalValue} max={values.finalValue || 1} display={`${Math.round(values.finalValue).toLocaleString()} KWK`} tone="final" animationKey={animationKey} />
       </div>
@@ -112,7 +126,7 @@ function MedievalAbacus({ values, humanEnergy, presence, hours, coefficient, cre
       <p className="abacus-equation">
         {humanEnergy.toFixed(2)} kWh/h × {presence.toFixed(2)} presence × {hours.toFixed(2)} h × {coefficient}
         <br />
-        + machines + location + materials + adjustment
+        + machines + location + materials + external investment + adjustment
       </p>
     </div>
   );
@@ -138,7 +152,7 @@ function EnergyFoundation({ jobPreset, values, humanEnergy, presence, hours, coe
         <div role="row"><strong>Joules</strong><span>{Math.round(values.humanJoules).toLocaleString()} J</span><code>{values.humanPhysicalKWh.toFixed(4)} × 3,600,000</code></div>
         <div role="row"><strong>Watt-hours</strong><span>{values.humanWh.toLocaleString(undefined, { maximumFractionDigits: 2 })} Wh</span><code>{values.humanPhysicalKWh.toFixed(4)} × 1,000</code></div>
         <div role="row"><strong>Kilowatt-hours</strong><span>{values.humanPhysicalKWh.toFixed(4)} kWh</span><code>Physical energy foundation</code></div>
-        <div role="row"><strong>Kingdom accounting</strong><span>× {coefficient}</span><code>Locked human–industrial coefficient</code></div>
+        <div role="row"><strong>Kingdom accounting</strong><span>× {coefficient}</span><code>Locked Human Contribution Coefficient</code></div>
         <div className="foundation-total" role="row"><strong>Human KWK</strong><span>{values.human.toFixed(2)} KWK</span><code>{values.humanPhysicalKWh.toFixed(4)} × {coefficient}</code></div>
       </div>
       <small className="foundation-note">Calculator automatically multiplies the hourly human and machine values by Hours Deployed.</small>
@@ -170,16 +184,29 @@ export default function KingdomWattCalculator() {
   const [humanEnergy, setHumanEnergy] = useState(0.6);
   const [presence, setPresence] = useState(1);
   const coefficient = 625;
+  const [projectName, setProjectName] = useState("");
+  const [projectType, setProjectType] = useState("Creative project");
+  const [projectDescription, setProjectDescription] = useState("");
+  const [creatorName, setCreatorName] = useState("");
+  const [evidenceLinks, setEvidenceLinks] = useState("");
   const [hours, setHours] = useState(1);
+  const [machineMode, setMachineMode] = useState("library");
   const [machinePerHour, setMachinePerHour] = useState(0.30);
   const [selectedMachines, setSelectedMachines] = useState([]);
   const [locationPerHour, setLocationPerHour] = useState(15);
   const [materials, setMaterials] = useState(0);
+  const [externalInvestment, setExternalInvestment] = useState(0);
   const [rate, setRate] = useState(0.06483);
   const [currency, setCurrency] = useState("CAD");
+  const [region, setRegion] = useState("Quebec, Canada");
+  const [rateSource, setRateSource] = useState("Hydro-Québec reference");
+  const [rateConfidence, setRateConfidence] = useState("Regional reference");
+  const [rateStatus, setRateStatus] = useState("");
   const [creatorAdjustment, setCreatorAdjustment] = useState(0);
   const [skin, setSkin] = useState("digital");
   const [buddyEnabled, setBuddyEnabled] = useState(false);
+  const [finalizedProject, setFinalizedProject] = useState(null);
+  const [review, setReview] = useState(null);
 
   useEffect(() => {
     const savedRate = Number(localStorage.getItem("kwk-local-rate"));
@@ -204,7 +231,7 @@ export default function KingdomWattCalculator() {
 
   const values = useMemo(() => {
     const safeRate = rate > 0 ? rate : 0.00001;
-    const effectiveMachineRate = machinePerHour + machineLibraryTotal;
+    const effectiveMachineRate = machineMode === "library" ? machineLibraryTotal : machinePerHour;
     const humanPhysicalKWh = humanEnergy * presence * hours;
     const humanJoules = humanPhysicalKWh * 3600000;
     const humanWh = humanPhysicalKWh * 1000;
@@ -212,10 +239,11 @@ export default function KingdomWattCalculator() {
     const machines = effectiveMachineRate * hours;
     const location = (locationPerHour / safeRate) * hours;
     const materialEnergy = materials / safeRate;
-    const estimated = human + machines + location + materialEnergy;
+    const externalInvestmentEnergy = externalInvestment / safeRate;
+    const estimated = human + machines + location + materialEnergy + externalInvestmentEnergy;
     const finalValue = Math.max(0, estimated + creatorAdjustment);
-    return { humanPhysicalKWh, humanJoules, humanWh, human, machines, location, materialEnergy, estimated, finalValue, effectiveMachineRate, localEquivalent: finalValue * safeRate };
-  }, [humanEnergy, presence, hours, machinePerHour, machineLibraryTotal, locationPerHour, materials, rate, creatorAdjustment]);
+    return { humanPhysicalKWh, humanJoules, humanWh, human, machines, location, materialEnergy, externalInvestmentEnergy, estimated, finalValue, effectiveMachineRate, localEquivalent: finalValue * safeRate };
+  }, [humanEnergy, presence, hours, machineMode, machinePerHour, machineLibraryTotal, locationPerHour, materials, externalInvestment, rate, creatorAdjustment]);
 
   function applyJobPreset(name) {
     setJobPreset(name);
@@ -223,6 +251,7 @@ export default function KingdomWattCalculator() {
     setHumanPreset(humanName);
     setHumanEnergy(HUMAN_PRESETS[humanName]);
     setPresence(p);
+    setMachineMode("custom");
     setMachinePerHour(machine);
     setLocationPerHour(location);
     setMaterials(material);
@@ -233,12 +262,68 @@ export default function KingdomWattCalculator() {
     setSelectedMachines((current) => current.includes(id) ? current.filter((x) => x !== id) : [...current, id]);
   }
 
+  function useMyLocation() {
+    setRateStatus("Requesting location permission…");
+    if (!navigator.geolocation) {
+      setRateStatus("Location is not supported by this browser. Use a custom rate.");
+      return;
+    }
+    navigator.geolocation.getCurrentPosition((position) => {
+      const matchedRegion = detectSupportedRegion(position.coords.latitude, position.coords.longitude);
+      if (!matchedRegion) {
+        setRateStatus("Location detected, but no verified regional reference is configured yet. Use a custom rate.");
+        return;
+      }
+      const reference = REGIONAL_RATE_REFERENCES[matchedRegion];
+      setRegion(matchedRegion);
+      setRate(reference.rate);
+      setCurrency(reference.currency);
+      setRateSource(reference.source);
+      setRateConfidence(reference.confidence);
+      setRateStatus(`Detected ${matchedRegion}. Reference applied.`);
+    }, () => setRateStatus("Location permission was declined or unavailable. Use a custom rate."), { enableHighAccuracy: false, timeout: 10000 });
+  }
+
+  function finalizeProject() {
+    const snapshot = {
+      id: `KWK-${Date.now()}`,
+      projectName: projectName.trim() || "Untitled project",
+      projectType,
+      projectDescription: projectDescription.trim(),
+      creatorName: creatorName.trim(),
+      evidenceLinks: evidenceLinks.trim(),
+      createdAt: new Date().toISOString(),
+      inputs: { humanEnergy, presence, hours, coefficient, machineMode, machinePerHour, selectedMachines, locationPerHour, materials, externalInvestment, rate, currency, region, rateSource, rateConfidence, creatorAdjustment },
+      values: { ...values },
+    };
+    setFinalizedProject(snapshot);
+    setReview(null);
+  }
+
+  function runPlausibilityReview() {
+    if (!finalizedProject) return;
+    const warnings = [];
+    const notes = [];
+    if (!finalizedProject.projectDescription) warnings.push("Add a project description so the calculation can be judged against the work performed.");
+    if (finalizedProject.inputs.presence > 0.9 && finalizedProject.inputs.hours > 8) warnings.push("Sustained Presence above 0.9 for more than 8 hours deserves supporting notes or segmentation.");
+    if (finalizedProject.inputs.machineMode === "library" && finalizedProject.inputs.selectedMachines.length === 0) notes.push("No machine energy was selected from the library.");
+    if (finalizedProject.inputs.rateConfidence === "Custom value") notes.push("A custom energy exchange reference was used; preserve the source or bill with the ledger entry.");
+    if (finalizedProject.inputs.externalInvestment > 0 && finalizedProject.inputs.materials > 0) notes.push("Confirm that external investment and material cost are separate amounts and not the same money counted twice.");
+    if (finalizedProject.values.finalValue < 0 || !Number.isFinite(finalizedProject.values.finalValue)) warnings.push("The final value is mathematically invalid.");
+    setReview({
+      arithmetic: Number.isFinite(finalizedProject.values.finalValue) ? "PASS" : "FAIL",
+      duplicateRisk: warnings.some((item) => item.includes("counted twice")) ? "REVIEW" : "PASS",
+      plausibility: warnings.length ? "REVIEW" : "PASS",
+      warnings, notes,
+    });
+  }
+
   return (
     <main className={`kwk-calculator-shell skin-${skin}`}>
       <header className="kwk-calculator-hero">
         <p className="eyebrow">KINGDOMWATT</p>
-        <h1>Creative Energetic Value Calculator</h1>
-        <p>Estimate the human, machine, location, and material energy deployed to create a song, service, or physical result.</p>
+        <h1>KingdomWatt Project Calculator</h1>
+        <p>Describe a project, calculate the energy and recognized contribution invested in it, then prepare a reviewable ledger draft.</p>
         <div className="calculator-skin-switch" role="group" aria-label="Calculator skin">
           <span>Calculator skin</span>
           <button className={skin === "digital" ? "active" : ""} onClick={() => setSkin("digital")}>Digital</button>
@@ -249,6 +334,17 @@ export default function KingdomWattCalculator() {
 
       <div className="kwk-calculator-layout">
         <section className="kwk-calculator-panel">
+          <div className="kwk-project-card">
+            <p className="eyebrow">PROJECT</p>
+            <div className="kwk-two-columns">
+              <label className="kwk-field"><span>Project name</span><input value={projectName} onChange={(e) => setProjectName(e.target.value)} placeholder="KingdomWatt calculator update" /></label>
+              <label className="kwk-field"><span>Project type</span><input value={projectType} onChange={(e) => setProjectType(e.target.value)} /></label>
+              <label className="kwk-field"><span>Creator / team</span><input value={creatorName} onChange={(e) => setCreatorName(e.target.value)} placeholder="Name or team" /></label>
+              <label className="kwk-field"><span>Evidence or links</span><input value={evidenceLinks} onChange={(e) => setEvidenceLinks(e.target.value)} placeholder="Optional URLs, files, receipts" /></label>
+            </div>
+            <label className="kwk-field"><span>Short project description</span><textarea value={projectDescription} onChange={(e) => setProjectDescription(e.target.value)} rows="4" placeholder="What was created, changed, repaired, researched, or delivered?" /></label>
+          </div>
+
           <h2>1. What are you valuing?</h2>
           <label className="kwk-field">
             <span>Job or activity preset</span>
@@ -316,41 +412,54 @@ export default function KingdomWattCalculator() {
           </div>
 
           <h2>3. Machines, place, and materials</h2>
-          <div className="kwk-two-columns">
-            <NumberField label="Machine energy per hour" value={machinePerHour} onChange={setMachinePerHour} step="0.01"
-              help="Calculator automatically multiplies this value by Hours Deployed."
-              info={<>
-                <strong>Machine Energy per Hour</strong>
-                <span>Standard desktop computer: approximately 0.15–0.30 kWh/hour.</span>
-                <span>Include computers, cameras, lighting, audio equipment, power tools, and other machines.</span>
-              </>} />
+          <div className="kwk-machine-mode" role="group" aria-label="Machine input mode">
+            <button className={machineMode === "library" ? "active" : ""} onClick={() => setMachineMode("library")}>Use Machine Library</button>
+            <button className={machineMode === "custom" ? "active" : ""} onClick={() => setMachineMode("custom")}>Enter Custom Total</button>
+          </div>
 
+          {machineMode === "custom" ? (
+            <NumberField label="Custom machine energy per hour" value={machinePerHour} onChange={setMachinePerHour} step="0.01"
+              help="Custom mode replaces the Machine Library. The two values are never added together."
+              info={<><strong>Custom Machine Energy</strong><span>Use one combined hourly estimate only when the library does not fit the project.</span><span>Choosing custom mode prevents library machines from being counted again.</span></>} />
+          ) : (
+            <div className="kwk-machine-library">
+              <p>Select every machine used. The library replaces the custom machine total, preventing double-counting.</p>
+              <div className="kwk-machine-grid">
+                {MACHINE_LIBRARY.map(([id, label, machineRate]) => (
+                  <label key={id}>
+                    <input type="checkbox" checked={selectedMachines.includes(id)} onChange={() => toggleMachine(id)} />
+                    <span>{label}</span><strong>{machineRate.toFixed(2)} kWh/h</strong>
+                  </label>
+                ))}
+              </div>
+              <div className="kwk-machine-total"><span>Machine library total</span><strong>{machineLibraryTotal.toFixed(2)} kWh/h</strong></div>
+            </div>
+          )}
+
+          <div className="kwk-two-columns">
             <NumberField label={`Location cost per hour (${currency})`} value={locationPerHour} onChange={setLocationPerHour} step="0.5" />
             <NumberField label={`Material cost (${currency})`} value={materials} onChange={setMaterials} step="0.5" />
+            <NumberField label={`External investment (${currency})`} value={externalInvestment} onChange={setExternalInvestment} step="0.5"
+              help="Donations, Ko-fi, Patreon, grants, sponsorships, crowdfunding, or gifts entering this project."
+              info={<><strong>External Investment</strong><span>Financial support is normalized through the selected Energy Exchange Reference.</span><code>External investment ÷ local rate = energy-equivalent KW₭</code><span>The Human Contribution Coefficient does not apply to purchased or donated resources.</span></>} />
             <NumberField label="King's / creator's adjustment (KWK)" value={creatorAdjustment}
               onChange={setCreatorAdjustment} min="-999999" step="1"
               help="The calculator estimates. The King or creator records the official value." />
           </div>
 
-          <details className="kwk-machine-library">
-            <summary>Machine library</summary>
-            <p>Select standard machines to add their hourly use to the manual machine value.</p>
-            <div className="kwk-machine-grid">
-              {MACHINE_LIBRARY.map(([id, label, machineRate]) => (
-                <label key={id}>
-                  <input type="checkbox" checked={selectedMachines.includes(id)} onChange={() => toggleMachine(id)} />
-                  <span>{label}</span><strong>{machineRate.toFixed(2)} kWh/h</strong>
-                </label>
-              ))}
+          <h2>4. Energy Exchange Reference</h2>
+          <div className="kwk-rate-card">
+            <div>
+              <strong>{region}</strong>
+              <span>{rateSource}</span>
+              <small>{rateConfidence}</small>
             </div>
-            <div className="kwk-machine-total"><span>Machine library total</span><strong>{machineLibraryTotal.toFixed(2)} kWh/h</strong></div>
-            <div className="kwk-machine-total"><span>Effective machine energy per hour</span><strong>{values.effectiveMachineRate.toFixed(2)} kWh/h</strong></div>
-          </details>
-
-          <h2>4. Your local energy market</h2>
+            <button onClick={useMyLocation}>Use my location</button>
+          </div>
+          {rateStatus ? <p className="kwk-rate-status">{rateStatus}</p> : null}
           <div className="kwk-two-columns">
-            <NumberField label={`Local electricity rate (${currency}/kWh)`} value={rate} onChange={setRate} step="0.00001"
-              help="This changes only the local currency expression, never the KWK value." />
+            <NumberField label={`Electricity reference (${currency}/kWh)`} value={rate} onChange={(value) => { setRate(value); setRateSource("Visitor-entered reference"); setRateConfidence("Custom value"); }} step="0.00001"
+              help="A custom value is allowed and is marked in the ledger for reproducibility." />
             <label className="kwk-field">
               <span>Local currency code</span>
               <input value={currency} maxLength="3" onChange={(e) => setCurrency(e.target.value.toUpperCase())} />
@@ -375,6 +484,7 @@ export default function KingdomWattCalculator() {
                 <div><dt>Machines</dt><dd>{values.machines.toFixed(2)} KWK</dd></div>
                 <div><dt>Location</dt><dd>{values.location.toFixed(2)} KWK</dd></div>
                 <div><dt>Materials</dt><dd>{values.materialEnergy.toFixed(2)} KWK</dd></div>
+                <div><dt>External investment</dt><dd>{values.externalInvestmentEnergy.toFixed(2)} KWK</dd></div>
                 <div><dt>Estimated subtotal</dt><dd>{values.estimated.toFixed(2)} KWK</dd></div>
                 <div><dt>King's / creator's adjustment</dt><dd>{creatorAdjustment.toFixed(2)} KWK</dd></div>
               </dl>
@@ -383,7 +493,30 @@ export default function KingdomWattCalculator() {
                 <strong>{values.localEquivalent.toFixed(2)} {currency}</strong>
                 <small>{rate.toFixed(5)} {currency} per kWh</small>
               </div>
-              <p className="kwk-note">KWK remains the unit of account. Local currency is only the visitor’s local expression of that energy.</p>
+              <p className="kwk-note">KWK remains the unit of account. Local currency is an energy-exchange reference, not the intrinsic worth of the creation.</p>
+              <div className="kwk-ledger-actions">
+                <button className="kwk-primary-action" onClick={finalizeProject}>Finalize Project</button>
+                <small>Freezes this calculation into a reviewable project draft. It does not yet add anything to the official ledger.</small>
+              </div>
+              {finalizedProject ? (
+                <div className="kwk-finalized-card">
+                  <p className="eyebrow">DRAFT LEDGER PROJECT</p>
+                  <strong>{finalizedProject.projectName}</strong>
+                  <span>{Math.round(finalizedProject.values.finalValue).toLocaleString()} KWK</span>
+                  <small>{new Date(finalizedProject.createdAt).toLocaleString()}</small>
+                  <button onClick={runPlausibilityReview}>Run plausibility review</button>
+                  {review ? (
+                    <div className="kwk-review">
+                      <div><span>Arithmetic</span><strong>{review.arithmetic}</strong></div>
+                      <div><span>Double-counting</span><strong>{review.duplicateRisk}</strong></div>
+                      <div><span>Plausibility</span><strong>{review.plausibility}</strong></div>
+                      {review.warnings.map((item) => <p key={item}>⚠ {item}</p>)}
+                      {review.notes.map((item) => <p key={item}>• {item}</p>)}
+                      <small>This is an automated pre-check. A future Kingdom Auditor service can replace it with a fuller AI review before official ledger submission.</small>
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
             </>
           )}
           <BuddyReaction enabled={buddyEnabled} values={values} hours={hours} />
