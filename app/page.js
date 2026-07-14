@@ -12,6 +12,7 @@ export default function Home() {
           <div className="actions">
             <Link className="button primary" href={`/song/${featured.slug}`}>Play featured song</Link>
             <Link className="button secondary" href="/music">View all 54 songs</Link>
+            <Link className="button secondary" href="/shop">View planned shop</Link>
           </div>
         </div>
         <Link href={`/song/${featured.slug}`} className="featured-card">

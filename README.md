@@ -21,3 +21,11 @@ npm run test:fair-deal
 ```
 
 Read the integration summary in [`FAIR_DEAL_INTEGRATION.md`](./FAIR_DEAL_INTEGRATION.md) and the full protocol in [`docs/fair-deal/protocol-v0.1.md`](./docs/fair-deal/protocol-v0.1.md).
+
+## Royal Chaos shop catalogue
+
+The planned digital-first and physical product ladder is visible at:
+
+`/shop`
+
+Prices and product copy are centralized in [`data/shopProducts.js`](./data/shopProducts.js). Checkout remains disabled until payment and fulfilment are implemented. See [`SHOP_PRICING.md`](./SHOP_PRICING.md).

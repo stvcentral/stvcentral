@@ -6,6 +6,7 @@ export default function SiteHeader() {
       <Link href="/" className="brand">STV CENTRAL</Link>
       <nav aria-label="Main navigation">
         <Link href="/music">Royal Chaos</Link>
+        <Link href="/shop">Shop</Link>
         <Link href="/projects">Projects</Link>
         <Link href="/fair-deal">Fair Deal</Link>
       </nav>

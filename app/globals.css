@@ -1359,3 +1359,178 @@ main { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
     justify-content: flex-start;
   }
 }
+
+/* Royal Chaos shop */
+.shop-page {
+  width: min(1280px, calc(100% - 2rem));
+}
+
+.shop-heading {
+  max-width: 68rem;
+}
+
+.shop-heading h1 {
+  margin: .35rem 0 1rem;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: .95;
+  letter-spacing: -.055em;
+}
+
+.shop-explainer {
+  display: grid;
+  grid-template-columns: minmax(260px, .8fr) 1.2fr;
+  gap: 2rem;
+  align-items: start;
+  margin-bottom: 4rem;
+  padding: 2rem;
+  border: 1px solid rgba(213,162,75,.4);
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(213,162,75,.12), rgba(21,21,21,.92));
+}
+
+.shop-explainer h2,
+.shop-section-heading h2,
+.shop-principles h2 {
+  margin: .3rem 0;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+
+.shop-explainer > p,
+.shop-section-heading > p,
+.shop-principles li {
+  color: var(--muted);
+}
+
+.shop-section {
+  margin: 0 0 4.5rem;
+}
+
+.shop-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: 1.4rem;
+}
+
+.shop-section-heading > p {
+  max-width: 36rem;
+  margin: 0;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.shop-product-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 355px;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #181818, #111);
+}
+
+.shop-product-card:hover {
+  border-color: rgba(213,162,75,.72);
+}
+
+.shop-product-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .75rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.shop-format {
+  color: var(--gold);
+}
+
+.shop-availability {
+  padding: .3rem .55rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  text-align: right;
+}
+
+.shop-product-card h2 {
+  margin: 1.5rem 0 .35rem;
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  line-height: 1.05;
+}
+
+.shop-price {
+  margin: 0 0 1.1rem;
+  color: var(--gold);
+  font-size: 1.5rem;
+  font-weight: 950;
+}
+
+.shop-description {
+  margin: 0;
+  color: var(--text);
+}
+
+.shop-note {
+  margin: .85rem 0 1.4rem;
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+.shop-coming-soon {
+  width: 100%;
+  margin-top: auto;
+  padding: .85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 850;
+  cursor: not-allowed;
+}
+
+.shop-principles {
+  padding: 2rem;
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: var(--panel);
+}
+
+.shop-principles ul {
+  display: grid;
+  gap: .75rem;
+  margin: 1.5rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.shop-principles li::marker {
+  color: var(--gold);
+}
+
+@media (max-width: 760px) {
+  .shop-explainer,
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .7rem;
+  }
+
+  .shop-product-card {
+    min-height: 0;
+  }
+}
