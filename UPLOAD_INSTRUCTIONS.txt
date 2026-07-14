@@ -1,0 +1,14 @@
+PRE-LAUNCH SHORTCUTS UPDATE
+
+1. Extract this ZIP.
+2. Upload its contents into the ROOT of your GitHub repository.
+3. Allow app/layout.js and app/globals.css to be replaced.
+4. Commit the changes.
+
+The deployment will show Admin, Calculator, and Fair Deal shortcut buttons by default.
+
+At public launch, set this Vercel Production environment variable:
+NEXT_PUBLIC_SITE_LIVE=true
+Then redeploy. The shortcut bar will disappear.
+
+Important: hiding the bar is not authentication. Direct routes remain available.
