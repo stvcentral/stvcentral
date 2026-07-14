@@ -31,6 +31,15 @@ export default function AdminPage() {
           </div>
         </Link>
 
+        <Link href="/admin/shop" className="private-hub-card">
+          <span className="private-hub-icon">▣</span>
+          <div>
+            <p className="eyebrow">COMMERCE</p>
+            <h2>Shop Editor</h2>
+            <p>Edit product descriptions, planned prices, and product or mockup images.</p>
+          </div>
+        </Link>
+
 
         <Link href="/admin/reveals" className="private-hub-card">
           <span className="private-hub-icon">⚡</span>

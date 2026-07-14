@@ -29,3 +29,5 @@ The planned digital-first and physical product ladder is visible at:
 `/shop`
 
 Prices and product copy are centralized in [`data/shopProducts.js`](./data/shopProducts.js). Checkout remains disabled until payment and fulfilment are implemented. See [`SHOP_PRICING.md`](./SHOP_PRICING.md).
+
+The private shop editor is available at `/admin/shop`. It can update catalogue copy, planned prices, and optional product or mockup images through the existing GitHub-backed admin system. See [`SHOP_ADMIN.md`](./SHOP_ADMIN.md).

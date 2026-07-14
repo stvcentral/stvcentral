@@ -6,6 +6,8 @@ export default function PrivateNav() {
       <Link href="/admin">Admin</Link>
       <Link href="/dashboard">Dashboard</Link>
       <Link href="/workspace">Workspace</Link>
+      <Link href="/admin/shop">Shop Editor</Link>
+      <Link href="/shop">View shop</Link>
       <Link href="/">View public site</Link>
     </nav>
   );

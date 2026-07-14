@@ -12,6 +12,16 @@ function ProductCard({ product }) {
         <span className="shop-format">{product.format}</span>
         <span className="shop-availability">{product.availability}</span>
       </div>
+      <div className={`shop-product-image ${product.image ? "has-image" : ""}`}>
+        {product.image ? (
+          <img src={product.image} alt={product.imageAlt || `${product.name} preview`} />
+        ) : (
+          <div aria-hidden="true">
+            <span>RC</span>
+            <small>Product image coming soon</small>
+          </div>
+        )}
+      </div>
       <h2>{product.name}</h2>
       <p className="shop-price">{product.priceLabel}</p>
       <p className="shop-description">{product.description}</p>
