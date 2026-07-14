@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stvcentral.com/schemas/fair-deal-transaction-v0.1.json",
+  "title": "Kingdom Fair Deal Transaction",
+  "description": "An energy-first, non-enforcing transaction record governed by the Kingdom Fair Deal Protocol v0.1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "protocolVersion", "title", "purpose", "parties", "status", "agreement"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "protocolVersion": { "const": "0.1" },
+    "title": { "type": "string", "minLength": 1 },
+    "purpose": { "type": "string", "minLength": 1 },
+    "status": {
+      "enum": ["draft", "proposed", "agreed", "in_progress", "completed", "completed_with_unhappiness", "unresolved", "resolved_after_disagreement", "cancelled_by_agreement"]
+    },
+    "parties": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/party" }
+    },
+    "agreement": { "$ref": "#/$defs/agreement" },
+    "outcome": { "$ref": "#/$defs/outcome" },
+    "reputation": { "$ref": "#/$defs/reputation" },
+    "enforcement": { "const": "outside_platform" }
+  },
+  "$defs": {
+    "kwk": { "type": "number", "minimum": 0 },
+    "party": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "displayName", "verifiedTransactionParty"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "displayName": { "type": "string", "minLength": 1 },
+        "verifiedTransactionParty": { "const": true }
+      }
+    },
+    "valueComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "contributorId", "kwk", "source", "confidence"],
+      "properties": {
+        "category": {
+          "enum": ["direct_delivered", "transaction_expense", "equipment_deployment", "reusable_preparation", "embedded_capacity", "risk_and_constraint"]
+        },
+        "contributorId": { "type": "string", "minLength": 1 },
+        "kwk": { "$ref": "#/$defs/kwk" },
+        "source": { "enum": ["human_fact", "preset", "ai_inference", "calculation"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "reusable": { "type": "boolean", "default": false },
+        "allocationBasis": { "type": ["string", "null"] },
+        "evidence": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "agreement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["energyUnit", "invoiceValueKwk", "fullValueKwk", "agreedSettlementKwk", "benevolentContributionKwk", "valueComponents"],
+      "properties": {
+        "energyUnit": { "const": "KW₭" },
+        "invoiceValueKwk": { "$ref": "#/$defs/kwk" },
+        "fullValueKwk": { "$ref": "#/$defs/kwk" },
+        "agreedSettlementKwk": { "$ref": "#/$defs/kwk" },
+        "benevolentContributionKwk": { "$ref": "#/$defs/kwk" },
+        "valueComponents": { "type": "array", "items": { "$ref": "#/$defs/valueComponent" } },
+        "acceptedByPartyIds": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+        "acceptedAt": { "type": ["string", "null"], "format": "date-time" },
+        "currencyBridge": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["currency", "nativeAmount", "kwkEquivalent", "recordedAt"],
+          "properties": {
+            "currency": { "type": "string", "minLength": 3, "maxLength": 3 },
+            "nativeAmount": { "type": "number", "minimum": 0 },
+            "kwkEquivalent": { "$ref": "#/$defs/kwk" },
+            "recordedAt": { "type": "string", "format": "date-time" }
+          }
+        }
+      }
+    },
+    "outcome": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["deliveredSettlementKwk", "unfulfilledObligationKwk", "partyOutcomeRecords"],
+      "properties": {
+        "deliveredSettlementKwk": { "$ref": "#/$defs/kwk" },
+        "unfulfilledObligationKwk": { "$ref": "#/$defs/kwk" },
+        "partyOutcomeRecords": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["partyId", "outcome"],
+            "properties": {
+              "partyId": { "type": "string", "minLength": 1 },
+              "outcome": { "enum": ["satisfied", "unhappy", "unresolved", "resolved_after_disagreement"] },
+              "note": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "reputation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["eligibleReporterPartyIds", "outsidersCanAffect", "declaresGuilt"],
+      "properties": {
+        "eligibleReporterPartyIds": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+        "outsidersCanAffect": { "const": false },
+        "declaresGuilt": { "const": false }
+      }
+    }
+  }
+}

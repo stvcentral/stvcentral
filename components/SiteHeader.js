@@ -7,6 +7,7 @@ export default function SiteHeader() {
       <nav aria-label="Main navigation">
         <Link href="/music">Royal Chaos</Link>
         <Link href="/projects">Projects</Link>
+        <Link href="/fair-deal">Fair Deal</Link>
       </nav>
     </header>
   );

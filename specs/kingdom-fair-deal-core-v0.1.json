@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Kingdom Fair Deal Core v0.1",
+  "version": "0.1",
+  "status": "working_constitutional_specification",
+  "date": "2026-07-14",
+  "unit": {
+    "primary": "KW₭",
+    "name": "KingdomWatt",
+    "energy_first": true,
+    "currency_role": "optional_settlement_bridge_only",
+    "human_coefficient": {
+      "symbol": "H_i",
+      "value": 625,
+      "status": "unchanged_current_calculator"
+    }
+  },
+  "doctrine": {
+    "core": "Not everything valuable must be charged, but everything valuable should be visible.",
+    "record_not_enforce": true,
+    "commission_on_transaction": 0,
+    "human_consent_required": true,
+    "currency_creation_from_value_gap": "tabled",
+    "automatic_ad_credit_from_value_gap": false
+  },
+  "formulas": {
+    "benevolent_contribution": {
+      "expression": "max(0, agreed_full_value_kwk - agreed_settlement_kwk)",
+      "spendable": false,
+      "transferable": false,
+      "automatic_when_agreed": true
+    },
+    "unfulfilled_obligation": {
+      "expression": "max(0, agreed_settlement_kwk - delivered_settlement_kwk)",
+      "never_reclassify_as_benevolence": true
+    },
+    "completed_settlement_ratio": {
+      "expression": "delivered_settlement_kwk / agreed_settlement_kwk",
+      "use": "transaction_context_not_moral_score"
+    }
+  },
+  "value_modes": {
+    "invoice": {
+      "question": "What immediate settlement is reasonable for this deal?",
+      "categories": [
+        "direct_delivered",
+        "transaction_expenses",
+        "equipment_deployment",
+        "risk",
+        "allocated_reusable_preparation"
+      ]
+    },
+    "full_value": {
+      "question": "What total value is being activated or transferred?",
+      "categories": [
+        "invoice_components",
+        "reusable_preparation_activated",
+        "embedded_capacity"
+      ]
+    }
+  },
+  "value_component_categories": [
+    "direct_delivered",
+    "transaction_expense",
+    "equipment_deployment",
+    "reusable_preparation",
+    "embedded_capacity",
+    "risk_and_constraint",
+    "settlement_received",
+    "benevolent_contribution",
+    "unfulfilled_obligation"
+  ],
+  "transaction_statuses": [
+    "draft",
+    "proposed",
+    "agreed",
+    "in_progress",
+    "completed",
+    "completed_with_unhappiness",
+    "unresolved",
+    "resolved_after_disagreement",
+    "cancelled_by_agreement"
+  ],
+  "reputation": {
+    "transaction_gated": true,
+    "outsiders_can_affect": false,
+    "fans_can_affect": false,
+    "competitors_can_affect": false,
+    "declares_guilt": false,
+    "star_rating": false,
+    "public_fields": [
+      "completed_transactions",
+      "unhappy_transactions",
+      "lifetime_unhappy_rate",
+      "recent_unhappy_rate",
+      "currently_unresolved",
+      "resolved_after_disagreement"
+    ]
+  },
+  "ai_architecture": {
+    "party_a_private_advocate": true,
+    "party_b_private_advocate": true,
+    "neutral_mediator": true,
+    "deterministic_kernel_controls_math": true,
+    "private_limits_disclosed_without_permission": false,
+    "ai_can_enforce": false,
+    "ai_can_decide_guilt": false,
+    "ai_can_bind_parties": false
+  },
+  "records": {
+    "transaction": {
+      "required": [
+        "id",
+        "parties",
+        "purpose",
+        "status",
+        "agreement_versions"
+      ],
+      "properties": {
+        "id": "string",
+        "parties": "Party[]",
+        "purpose": "string",
+        "status": "transaction_status",
+        "agreement_versions": "AgreementVersion[]",
+        "outcome": "Outcome|null"
+      }
+    },
+    "value_component": {
+      "required": [
+        "category",
+        "contributor_id",
+        "kwk",
+        "source",
+        "confidence"
+      ],
+      "properties": {
+        "category": "value_component_category",
+        "contributor_id": "string",
+        "kwk": "number>=0",
+        "source": "human_fact|preset|ai_inference|calculation",
+        "confidence": "0..1",
+        "reusable": "boolean",
+        "allocation_basis": "string|null",
+        "evidence": "string[]"
+      }
+    },
+    "settlement_term": {
+      "required": [
+        "provider_id",
+        "recipient_id",
+        "medium",
+        "agreed_kwk"
+      ],
+      "properties": {
+        "provider_id": "string",
+        "recipient_id": "string",
+        "medium": "KWK|currency|goods|service|access|revenue_share|other",
+        "native_amount": "number|string|null",
+        "native_unit": "string|null",
+        "agreed_kwk": "number>=0",
+        "bridge": "BridgeRecord|null",
+        "due_condition": "string"
+      }
+    },
+    "agreement_version": {
+      "immutable_after_acceptance": true,
+      "required": [
+        "version",
+        "accepted_by",
+        "accepted_at",
+        "agreed_full_value_kwk",
+        "agreed_settlement_kwk",
+        "obligations"
+      ],
+      "properties": {
+        "version": "integer>=1",
+        "accepted_by": "party_id[]",
+        "accepted_at": "datetime",
+        "agreed_full_value_kwk": "number>=0",
+        "agreed_settlement_kwk": "number>=0",
+        "benevolent_contribution_kwk": "computed",
+        "obligations": "Obligation[]",
+        "assumptions": "Assumption[]",
+        "protocol_version": "string"
+      }
+    },
+    "outcome": {
+      "required": [
+        "delivered_settlement_kwk",
+        "party_outcomes"
+      ],
+      "properties": {
+        "delivered_settlement_kwk": "number>=0",
+        "unfulfilled_obligation_kwk": "computed",
+        "party_outcomes": "PartyOutcome[]",
+        "resolved_at": "datetime|null",
+        "resolution_history": "ResolutionEvent[]"
+      }
+    }
+  },
+  "hard_safeguards": [
+    "no_reputation_without_verified_transaction_party",
+    "no_outsider_rating_or_review_bombing",
+    "no_unilateral_official_ledger_terms",
+    "immutable_accepted_agreement_versions",
+    "ai_inferences_labeled",
+    "historical_currency_bridge_preserved",
+    "benevolent_contribution_nonspendable",
+    "unfulfilled_obligation_not_benevolence",
+    "moderation_separate_from_transaction_reputation"
+  ],
+  "recommended_first_prototype": {
+    "name": "Single-Party Fair Deal Interview",
+    "inputs": [
+      "natural_language_deal_description"
+    ],
+    "outputs": [
+      "clarifying_questions",
+      "energy_first_value_map",
+      "invoice_mode_estimate",
+      "full_value_estimate",
+      "assumptions_and_confidence",
+      "draft_agreement",
+      "benevolent_contribution",
+      "unfulfilled_obligation_fields"
+    ]
+  }
+}

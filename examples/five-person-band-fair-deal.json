@@ -1,0 +1,48 @@
+{
+  "id": "example-band-show-001",
+  "protocolVersion": "0.1",
+  "title": "Five-person band — one-hour local show",
+  "purpose": "Provide a one-hour live performance while making the full activated value visible.",
+  "parties": [
+    { "id": "band", "displayName": "Example Band", "verifiedTransactionParty": true },
+    { "id": "venue", "displayName": "Example Venue", "verifiedTransactionParty": true }
+  ],
+  "status": "completed",
+  "agreement": {
+    "energyUnit": "KW₭",
+    "invoiceValueKwk": 7975,
+    "fullValueKwk": 9725,
+    "agreedSettlementKwk": 2500,
+    "benevolentContributionKwk": 7225,
+    "valueComponents": [
+      { "category": "direct_delivered", "contributorId": "band", "kwk": 4750, "source": "calculation", "confidence": 0.9, "reusable": false, "allocationBasis": null, "evidence": ["5 contributors × 2 hours × 0.8 kWh/h × 0.95 presence × H_i 625"] },
+      { "category": "transaction_expense", "contributorId": "band", "kwk": 1875, "source": "human_fact", "confidence": 1, "reusable": false, "allocationBasis": null, "evidence": ["CAD 150 gas translated through the agreement bridge"] },
+      { "category": "equipment_deployment", "contributorId": "band", "kwk": 600, "source": "preset", "confidence": 0.55, "reusable": false, "allocationBasis": null, "evidence": ["Four amplifiers and pedals"] },
+      { "category": "reusable_preparation", "contributorId": "band", "kwk": 2000, "source": "human_fact", "confidence": 0.75, "reusable": true, "allocationBasis": "25% allocated to invoice mode", "evidence": ["Rehearsed repertoire activated by this performance"] },
+      { "category": "embedded_capacity", "contributorId": "band", "kwk": 250, "source": "ai_inference", "confidence": 0.35, "reusable": true, "allocationBasis": "Visible in full-value mode only", "evidence": ["Existing skill and ensemble coordination"] },
+      { "category": "risk_and_constraint", "contributorId": "band", "kwk": 250, "source": "preset", "confidence": 0.4, "reusable": false, "allocationBasis": null, "evidence": ["Equipment transport and cancellation exposure"] }
+    ],
+    "acceptedByPartyIds": ["band", "venue"],
+    "acceptedAt": "2026-07-14T12:00:00-04:00",
+    "currencyBridge": {
+      "currency": "CAD",
+      "nativeAmount": 200,
+      "kwkEquivalent": 2500,
+      "recordedAt": "2026-07-14T12:00:00-04:00"
+    }
+  },
+  "outcome": {
+    "deliveredSettlementKwk": 2500,
+    "unfulfilledObligationKwk": 0,
+    "partyOutcomeRecords": [
+      { "partyId": "band", "outcome": "satisfied", "note": "The agreed settlement was delivered." },
+      { "partyId": "venue", "outcome": "satisfied", "note": "The performance was delivered." }
+    ]
+  },
+  "reputation": {
+    "eligibleReporterPartyIds": ["band", "venue"],
+    "outsidersCanAffect": false,
+    "declaresGuilt": false
+  },
+  "enforcement": "outside_platform"
+}
