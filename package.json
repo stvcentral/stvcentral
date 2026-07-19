@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "test:fair-deal": "node --test tests/fairDeal.test.mjs",
-    "test:shop-admin": "node --test tests/shopAdmin.test.mjs"
+    "test:shop-admin": "node --test tests/shopAdmin.test.mjs",
+    "test:qr": "node --test tests/qrRedirects.test.mjs"
   },
   "dependencies": {
     "next": "16.2.10",

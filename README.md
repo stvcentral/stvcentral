@@ -31,3 +31,9 @@ The planned digital-first and physical product ladder is visible at:
 Prices and product copy are centralized in [`data/shopProducts.js`](./data/shopProducts.js). Checkout remains disabled until payment and fulfilment are implemented. See [`SHOP_PRICING.md`](./SHOP_PRICING.md).
 
 The private shop editor is available at `/admin/shop`. It can update catalogue copy, planned prices, and optional product or mockup images through the existing GitHub-backed admin system. See [`SHOP_ADMIN.md`](./SHOP_ADMIN.md).
+
+## Royal Chaos short QR links
+
+Physical cards can use compact URLs such as `/q/3h`. The dynamic redirect
+layer resolves all 54 card codes to their existing song pages. See
+[`QR_REDIRECTS.md`](QR_REDIRECTS.md).
