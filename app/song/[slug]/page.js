@@ -25,7 +25,7 @@ export default async function SongPage({ params }) {
         <section className="song-hero">
           <div className="song-card-stage">
             {song.artwork ? <img className="song-artwork" src={song.artwork} alt={`${song.title} artwork`} /> : <CardVisual song={song} />}
-            <div className="song-energy-hotspot"><EnergeticValue value={song.energeticValue} compact /></div>
+            {!song.artwork && <div className="song-energy-hotspot"><EnergeticValue value={song.energeticValue} compact /></div>}
           </div>
           <div className="song-summary">
             <p className="eyebrow">STV SONG CARD · {song.cardName.toUpperCase()}</p>

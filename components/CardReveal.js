@@ -47,7 +47,7 @@ export default function CardReveal({ song }) {
         <div className="reveal-card">
           <div className="reveal-card-inner">
             <div className="reveal-card-back">
-              <img src="/media/card-back.png" alt="Royal Chaos card back" />
+              <img src="/cards/back.webp" alt="Royal Chaos card back" />
             </div>
             <div className="reveal-card-front">
               {song.artwork ? (

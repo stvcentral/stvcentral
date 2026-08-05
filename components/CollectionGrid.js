@@ -39,9 +39,9 @@ export default function CollectionGrid({ songs }) {
                     <CardVisual song={song} compact />
                   )
                 ) : (
-                  <img className="tile-artwork card-back-tile" src="/media/card-back.png" alt="Face-down Royal Chaos card" />
+                  <img className="tile-artwork card-back-tile" src="/cards/back.webp" alt="Face-down Royal Chaos card" />
                 )}
-                {isUnlocked && song.energeticValue ? (
+                {isUnlocked && !song.artwork && song.energeticValue ? (
                   <div className="collection-energy"><EnergeticValue value={song.energeticValue} compact /></div>
                 ) : null}
               </div>
