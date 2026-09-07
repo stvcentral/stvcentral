@@ -1,5 +1,11 @@
 # STV Central — JavaScript build
 
+## Customer launch package
+
+Start with [LAUNCH_GUIDE.md](LAUNCH_GUIDE.md) for the customer-ready album, accounts, persistent collections, deck/booster/single-card claims, protected music, and Docker hosting setup. Customer sign-in is at `/account`, claims at `/redeem`, collections at `/collection`, and owner code generation at `/owner`.
+
+Full Royal Chaos recordings now live in `private/music` and are served only after ownership checks. Public visitors hear 30-second previews. Run `npm test` and `npm run build`; after building, `node tests/customer-http.mjs` checks the running customer flow in an isolated test database.
+
 This version removes TypeScript entirely to avoid the Vercel dependency issue.
 
 Permanent first-song path:

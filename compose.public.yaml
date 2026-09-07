@@ -1,0 +1,22 @@
+services:
+  web:
+    environment:
+      TRUST_PROXY: "1"
+  https:
+    image: caddy:2
+    restart: unless-stopped
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:?Set SITE_DOMAIN in .env}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - https-data:/data
+      - https-config:/config
+    depends_on:
+      web:
+        condition: service_healthy
+volumes:
+  https-data:
+  https-config:

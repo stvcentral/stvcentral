@@ -1,6 +1,7 @@
 import "./globals.css";
+import "./customer.css";
 import SiteHeader from "../components/SiteHeader";
-import PrelaunchShortcuts from "../components/PrelaunchShortcuts";
+
 import AudioCoordinator from "../components/AudioCoordinator";
 
 export const metadata = {
@@ -14,8 +15,8 @@ export default function RootLayout({ children }) {
       <body>
         <AudioCoordinator />
         <SiteHeader />
-        <PrelaunchShortcuts />
-        {children}
+        <a className="skip-link" href="#main-content">Skip to content</a><div id="main-content" />
+        {children}<footer className="customer-footer"><span>STV CENTRAL · ROYAL CHAOS</span><nav aria-label="Footer"><a href="/help">Help & collection guide</a><a href="/privacy">Privacy</a><a href="/collection">My collection</a></nav></footer>
       </body>
     </html>
   );

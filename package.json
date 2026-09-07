@@ -8,11 +8,18 @@
     "start": "next start",
     "test:fair-deal": "node --test tests/fairDeal.test.mjs",
     "test:shop-admin": "node --test tests/shopAdmin.test.mjs",
-    "test:qr": "node --test tests/qrRedirects.test.mjs"
+    "test:qr": "node --test tests/qrRedirects.test.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:customers": "node --test tests/customers.test.mjs tests/cardAssets.test.mjs tests/qrRedirects.test.mjs",
+    "setup": "node scripts/setup.mjs",
+    "backup": "node scripts/backup-customers.mjs"
   },
   "dependencies": {
     "next": "16.2.10",
-    "react": "latest",
-    "react-dom": "latest"
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "engines": {
+    "node": ">=24.14.0 <25"
   }
 }

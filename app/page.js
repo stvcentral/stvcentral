@@ -1,25 +1,2 @@
-import Link from "next/link";
-import { songs } from "../data/songs";
-export default function Home() {
-  const featured = songs.find(song => song.slug === "2voices1fire") || songs[0];
-  return (
-    <main>
-      <section className="hero">
-        <div className="hero-copy">
-          <p className="eyebrow">ROYAL CHAOS · 54 SONG-CARD ALBUM</p>
-          <h1>Music with a permanent home.</h1>
-          <p>Each physical card points directly to its song inside the album playlist.</p>
-          <div className="actions">
-            <Link className="button primary" href={`/song/${featured.slug}`}>Play featured song</Link>
-            <Link className="button secondary" href="/music">View all 54 songs</Link>
-            <Link className="button secondary" href="/shop">View planned shop</Link>
-          </div>
-        </div>
-        <Link href={`/song/${featured.slug}`} className="featured-card">
-          <img src={featured.artwork} alt={`${featured.title} artwork`} />
-          <div><span>Featured release</span><strong>{featured.title}</strong></div>
-        </Link>
-      </section>
-    </main>
-  );
-}
+import Link from 'next/link';
+export default function Home(){return <main className="launch-home"><section className="album-hero"><div className="album-intro"><p className="eyebrow">THE 54 SONG-CARD ALBUM</p><h1>Hold the card.<br/><em>Keep the music.</em></h1><p>A deck of stories. A world of sound. Discover Royal Chaos, then bring your cards together in a collection that goes wherever you do.</p><div className="actions"><Link className="button primary" href="/music">Explore the album ↗</Link><Link className="button secondary" href="/redeem">I have a claim code</Link></div><div className="suit-line" aria-label="Hearts, Spades, Diamonds, Clubs">♥ <span>♠</span> ♦ <span>♣</span><small>52 suited cards · 2 jokers</small></div></div><div className="album-art"><img src="/cards/3h.webp" alt="2 Voices, 1 Fire — Three of Hearts"/><div className="art-caption"><span>ROYAL CHAOS / THE ALBUM</span><strong>Every card has a voice.</strong></div></div></section><section className="journey-strip" aria-label="How your collection works"><article><span>01 / CLAIM</span><h2>Make it yours.</h2><p>Use the unique code included with your deck, booster, or individual card.</p></article><article><span>02 / REVEAL</span><h2>Meet every card.</h2><p>Scan a song QR with your phone camera or open a card in your collection.</p></article><article><span>03 / RETURN</span><h2>Your music. With you.</h2><p>Sign in on any device to revisit your cards, listen, and download your songs.</p></article></section></main>}

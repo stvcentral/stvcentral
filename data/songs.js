@@ -11,7 +11,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "5:05",
     "artwork": "/cards/5h.webp",
-    "audio": null,
+    "audio": "/api/music/getlarkened",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -28,7 +28,7 @@ export const songs = [
     "musicalKey": "Em or G",
     "duration": "2:58",
     "artwork": "/cards/4h.webp",
-    "audio": null,
+    "audio": "/api/music/kakarot",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -45,7 +45,7 @@ export const songs = [
     "musicalKey": "A",
     "duration": "3:59",
     "artwork": "/cards/10h.webp",
-    "audio": null,
+    "audio": "/api/music/thedirtyroadstar",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -62,7 +62,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "3:42",
     "artwork": "/cards/jh.webp",
-    "audio": null,
+    "audio": "/api/music/thesunandthethunder",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -79,7 +79,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "4:58",
     "artwork": "/cards/2h.webp",
-    "audio": null,
+    "audio": "/api/music/lematch",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -96,7 +96,7 @@ export const songs = [
     "musicalKey": "G#m",
     "duration": "4:34",
     "artwork": "/cards/3h.webp",
-    "audio": "/media/2voices1fire.mp3",
+    "audio": "/api/music/2voices1fire",
     "why": "A song about two singers who challenge each other without becoming enemies—competition transformed into growth, brotherhood, and a stronger shared performance.",
     "lyrics": [
       {
@@ -181,7 +181,7 @@ export const songs = [
     "musicalKey": "A",
     "duration": "4:31",
     "artwork": "/cards/kh.webp",
-    "audio": null,
+    "audio": "/api/music/muriellerespira",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -198,7 +198,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "3:48",
     "artwork": "/cards/8h.webp",
-    "audio": null,
+    "audio": "/api/music/questron",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -215,7 +215,7 @@ export const songs = [
     "musicalKey": "A",
     "duration": "4:06",
     "artwork": "/cards/9h.webp",
-    "audio": null,
+    "audio": "/api/music/mapetiteetoilempl",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -232,7 +232,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "3:29",
     "artwork": "/cards/ah.webp",
-    "audio": null,
+    "audio": "/api/music/theacesoftheheart",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -249,7 +249,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "3:19",
     "artwork": "/cards/7h.webp",
-    "audio": null,
+    "audio": "/api/music/goodvibesonly",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -266,7 +266,7 @@ export const songs = [
     "musicalKey": "C",
     "duration": "2:28",
     "artwork": "/cards/6h.webp",
-    "audio": null,
+    "audio": "/api/music/pocketsmile",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -283,7 +283,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "3:44",
     "artwork": "/cards/qh.webp",
-    "audio": null,
+    "audio": "/api/music/queenoftheextreeaglesheart",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -300,7 +300,7 @@ export const songs = [
     "musicalKey": "G",
     "duration": "3:44",
     "artwork": "/cards/2p.webp",
-    "audio": null,
+    "audio": "/api/music/letatsaitrien",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -317,7 +317,7 @@ export const songs = [
     "musicalKey": "Gm",
     "duration": "2:51",
     "artwork": "/cards/3p.webp",
-    "audio": null,
+    "audio": "/api/music/legenieduchant",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -334,7 +334,7 @@ export const songs = [
     "musicalKey": "G",
     "duration": "2:02",
     "artwork": "/cards/4p.webp",
-    "audio": null,
+    "audio": "/api/music/lartcpasluvre",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -351,7 +351,7 @@ export const songs = [
     "musicalKey": "Em",
     "duration": "4:13",
     "artwork": "/cards/qp.webp",
-    "audio": null,
+    "audio": "/api/music/elleestencorela",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -368,7 +368,7 @@ export const songs = [
     "musicalKey": "Cm",
     "duration": "3:01",
     "artwork": "/cards/10p.webp",
-    "audio": null,
+    "audio": "/api/music/aliendansunefourmiliere",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -385,7 +385,7 @@ export const songs = [
     "musicalKey": "A",
     "duration": "3:31",
     "artwork": "/cards/8p.webp",
-    "audio": null,
+    "audio": "/api/music/onaimecaraler",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -402,7 +402,7 @@ export const songs = [
     "musicalKey": "Cm",
     "duration": "2:20",
     "artwork": "/cards/jp.webp",
-    "audio": null,
+    "audio": "/api/music/lacigaleetlafourmi",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -419,7 +419,7 @@ export const songs = [
     "musicalKey": "Eb",
     "duration": "3:07",
     "artwork": "/cards/5p.webp",
-    "audio": null,
+    "audio": "/api/music/leherodanssacave",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -436,7 +436,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "2:00",
     "artwork": "/cards/7p.webp",
-    "audio": null,
+    "audio": "/api/music/visagesansyeux",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -453,7 +453,7 @@ export const songs = [
     "musicalKey": "Gm",
     "duration": "2:22",
     "artwork": "/cards/9p.webp",
-    "audio": null,
+    "audio": "/api/music/travaildereve",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -470,7 +470,7 @@ export const songs = [
     "musicalKey": "C#m",
     "duration": "3:03",
     "artwork": "/cards/6p.webp",
-    "audio": null,
+    "audio": "/api/music/humainzip",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -487,7 +487,7 @@ export const songs = [
     "musicalKey": "G",
     "duration": "3:49",
     "artwork": "/cards/ap.webp",
-    "audio": null,
+    "audio": "/api/music/yvesiduty",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -504,7 +504,7 @@ export const songs = [
     "musicalKey": "Db or F Minor",
     "duration": "3:59",
     "artwork": "/cards/kp.webp",
-    "audio": null,
+    "audio": "/api/music/poorbabywiththebathwater",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -521,7 +521,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "4:04",
     "artwork": "/cards/kd.webp",
-    "audio": null,
+    "audio": "/api/music/mistakingvantageforvalue",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -538,7 +538,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "3:28",
     "artwork": "/cards/2d.webp",
-    "audio": null,
+    "audio": "/api/music/thestormcanscream",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -555,7 +555,7 @@ export const songs = [
     "musicalKey": "Am",
     "duration": "3:54",
     "artwork": "/cards/9d.webp",
-    "audio": null,
+    "audio": "/api/music/borntodefy",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -572,7 +572,7 @@ export const songs = [
     "musicalKey": "G",
     "duration": "3:17",
     "artwork": "/cards/jd.webp",
-    "audio": null,
+    "audio": "/api/music/ifoneofusisintroubleweallare",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -589,7 +589,7 @@ export const songs = [
     "musicalKey": "Dm",
     "duration": "3:50",
     "artwork": "/cards/5d.webp",
-    "audio": null,
+    "audio": "/api/music/shesintotherockstar",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -606,7 +606,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "3:15",
     "artwork": "/cards/7d.webp",
-    "audio": null,
+    "audio": "/api/music/selffulfillingprisons",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -623,7 +623,7 @@ export const songs = [
     "musicalKey": "Dm",
     "duration": "3:24",
     "artwork": "/cards/4d.webp",
-    "audio": null,
+    "audio": "/api/music/onoroff",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -640,7 +640,7 @@ export const songs = [
     "musicalKey": "Gm",
     "duration": "2:31",
     "artwork": "/cards/ad.webp",
-    "audio": null,
+    "audio": "/api/music/wakeup",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -657,7 +657,7 @@ export const songs = [
     "musicalKey": "Dm",
     "duration": "3:53",
     "artwork": "/cards/8d.webp",
-    "audio": null,
+    "audio": "/api/music/aplantoresettheworld",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -674,7 +674,7 @@ export const songs = [
     "musicalKey": "Em",
     "duration": "4:06",
     "artwork": "/cards/qd.webp",
-    "audio": null,
+    "audio": "/api/music/crownyourself",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -691,7 +691,7 @@ export const songs = [
     "musicalKey": "E",
     "duration": "3:28",
     "artwork": "/cards/3d.webp",
-    "audio": null,
+    "audio": "/api/music/gobblingitallup",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -708,7 +708,7 @@ export const songs = [
     "musicalKey": "F",
     "duration": "3:36",
     "artwork": "/cards/10d.webp",
-    "audio": null,
+    "audio": "/api/music/rockthispunktonight",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -725,7 +725,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "4:07",
     "artwork": "/cards/6d.webp",
-    "audio": null,
+    "audio": "/api/music/undergroundheroes",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -742,7 +742,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "6:08",
     "artwork": "/cards/jt.webp",
-    "audio": null,
+    "audio": "/api/music/donquichottethemirrorwars",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -759,7 +759,7 @@ export const songs = [
     "musicalKey": "Cm",
     "duration": "2:54",
     "artwork": "/cards/10t.webp",
-    "audio": null,
+    "audio": "/api/music/permissionslipnation",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -776,7 +776,7 @@ export const songs = [
     "musicalKey": "Gm",
     "duration": "4:21",
     "artwork": "/cards/5t.webp",
-    "audio": null,
+    "audio": "/api/music/theillusionofbeing",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -793,7 +793,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "3:56",
     "artwork": "/cards/4t.webp",
-    "audio": null,
+    "audio": "/api/music/whatshauntingyou",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -810,7 +810,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "3:36",
     "artwork": "/cards/qt.webp",
-    "audio": null,
+    "audio": "/api/music/noonesaprophetathomeoutofphase",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -827,7 +827,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "4:30",
     "artwork": "/cards/6t.webp",
-    "audio": null,
+    "audio": "/api/music/awishinthenight",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -844,7 +844,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "6:42",
     "artwork": "/cards/kt.webp",
-    "audio": null,
+    "audio": "/api/music/spectersofthethrone",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -861,7 +861,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "4:39",
     "artwork": "/cards/8t.webp",
-    "audio": null,
+    "audio": "/api/music/360by360view",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -878,7 +878,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "2:52",
     "artwork": "/cards/3t.webp",
-    "audio": null,
+    "audio": "/api/music/notspecial",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -895,7 +895,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "4:13",
     "artwork": "/cards/2t.webp",
-    "audio": null,
+    "audio": "/api/music/mintedoligarchs",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -912,7 +912,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "3:32",
     "artwork": "/cards/7t.webp",
-    "audio": null,
+    "audio": "/api/music/whydoyoucare",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -929,7 +929,7 @@ export const songs = [
     "musicalKey": "Em",
     "duration": "4:27",
     "artwork": "/cards/at.webp",
-    "audio": null,
+    "audio": "/api/music/paperempire",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -946,7 +946,7 @@ export const songs = [
     "musicalKey": "Ebm",
     "duration": "4:02",
     "artwork": "/cards/9t.webp",
-    "audio": null,
+    "audio": "/api/music/verdictlosing",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -963,7 +963,7 @@ export const songs = [
     "musicalKey": "G",
     "duration": "4:17",
     "artwork": "/cards/joker1.webp",
-    "audio": null,
+    "audio": "/api/music/flowstate",
     "why": "",
     "lyrics": [],
     "energeticValue": null
@@ -980,7 +980,7 @@ export const songs = [
     "musicalKey": "Em",
     "duration": "4:24",
     "artwork": "/cards/joker2.webp",
-    "audio": null,
+    "audio": "/api/music/thefuturelovesvincent",
     "why": "",
     "lyrics": [],
     "energeticValue": null

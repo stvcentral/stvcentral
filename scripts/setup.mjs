@@ -1,0 +1,10 @@
+import {existsSync,writeFileSync} from 'node:fs';
+import {randomBytes} from 'node:crypto';
+const origin=process.argv[2];
+if(!origin)throw Error('Usage: npm run setup -- https://your-domain.example');
+const url=new URL(origin);
+if(url.protocol!=='https:'||url.pathname!=='/'||url.search||url.hash||url.username||url.password)throw Error('Provide only the HTTPS website origin.');
+if(existsSync('.env'))throw Error('.env already exists; edit it directly to preserve your owner key.');
+const owner=randomBytes(32).toString('hex');
+writeFileSync('.env',`APP_ORIGIN=${url.origin}\nSITE_DOMAIN=${url.hostname}\nOWNER_KEY=${owner}\nTRUST_PROXY=0\nCUSTOMER_DB_PATH=/app/runtime/customers.sqlite\nMUSIC_DIR=/app/private/music\n`,{mode:0o600});
+console.log('Created .env. Store it privately. Your owner key is inside; use it at /owner.');

@@ -1,0 +1,10 @@
+.git
+.next
+node_modules
+.pnpm-store
+.build-tools
+runtime
+.test-runtime
+.env
+.env.*
+outputs

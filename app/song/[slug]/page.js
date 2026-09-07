@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
-import Player from "../../../components/Player";
+import CustomerSong from "../../../components/CustomerSong";
 import { CardVisual } from "../../../components/CardVisual";
-import CardReveal from "../../../components/CardReveal";
+
 import EnergeticValue from "../../../components/EnergeticValue";
 import { getSong, songs } from "../../../data/songs";
 
@@ -20,7 +20,7 @@ export default async function SongPage({ params }) {
 
   return (
     <>
-      <CardReveal song={song} />
+      
       <main className="song-page">
         <section className="song-hero">
           <div className="song-card-stage">
@@ -36,8 +36,7 @@ export default async function SongPage({ params }) {
               <div><dt>Length</dt><dd>{song.duration}</dd></div>
               <div><dt>Permanent URL</dt><dd>stvcentral.com/song/{song.slug}</dd></div>
             </dl>
-            {song.audio ? <audio className="main-audio" controls preload="metadata" src={song.audio} /> :
-              <div className="coming-soon">This permanent page is ready for its QR code. Audio will be added here.</div>}
+            <CustomerSong song={song} />
           </div>
         </section>
         <section className="song-sections">
@@ -63,7 +62,7 @@ export default async function SongPage({ params }) {
           </article>
         </section>
       </main>
-      <Player song={song} />
+      
     </>
   );
 }
