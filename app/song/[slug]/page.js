@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
 import CustomerSong from "../../../components/CustomerSong";
+import SongStreaming from "../../../components/SongStreaming";
+import streamingEntries from "../../../data/songStreaming.json";
+import { songStreamingLinks } from "../../../lib/streamingLinks.mjs";
 import { CardVisual } from "../../../components/CardVisual";
 
 import EnergeticValue from "../../../components/EnergeticValue";
@@ -17,6 +20,7 @@ export default async function SongPage({ params }) {
   const { slug } = await params;
   const song = getSong(slug);
   if (!song) notFound();
+  const streamingLinks = songStreamingLinks(streamingEntries[song.slug]);
 
   return (
     <>
@@ -36,7 +40,8 @@ export default async function SongPage({ params }) {
               <div><dt>Length</dt><dd>{song.duration}</dd></div>
               <div><dt>Permanent URL</dt><dd>stvcentral.com/song/{song.slug}</dd></div>
             </dl>
-            <CustomerSong song={song} />
+            <SongStreaming key={song.slug} title={song.title} links={streamingLinks} />
+            <CustomerSong song={song} hasStreaming={streamingLinks.length > 0} />
           </div>
         </section>
         <section className="song-sections">
