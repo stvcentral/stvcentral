@@ -16,7 +16,9 @@ async function req(path,{method='GET',data,cookie,owner,extra={}}={}){
 }
 try{
  let ready=false;for(let i=0;i<80;i++){if(server.exitCode!==null)throw Error(logs);try{const r=await fetch(origin+'/api/health');if(r.ok){ready=true;break;}}catch{}await delay(250);}assert.ok(ready,'server starts');
- for(const path of ['/','/music','/collection','/account','/redeem','/help','/privacy','/owner']){const r=await req(path);assert.equal(r.status,200,path);assert.match(await r.text(),/STV/);}
+ for(const path of ['/','/music','/collection','/account','/redeem','/help','/privacy','/owner','/playlist']){const r=await req(path);assert.equal(r.status,200,path);assert.match(await r.text(),/STV/);}
+ assert.equal((await req('/playlist')).headers.get('permissions-policy'),'camera=(self), microphone=()');
+ assert.equal((await req('/')).headers.get('permissions-policy'),'camera=(), microphone=()');
  const first=songs[0].slug,second=songs[1].slug;
  assert.equal((await req('/api/music/'+first)).status,401);
  assert.equal((await req('/media/royal-chaos/'+first+'.mp3')).status,404);
@@ -45,4 +47,4 @@ try{
  const newCookie=login.headers.get('set-cookie').split(';')[0];assert.equal((await (await req('/api/customer/me',{cookie:newCookie})).json()).collection.length,2);
  await req('/api/customer/logout',{method:'POST',cookie:newCookie,data:{}});assert.equal((await req('/api/music/'+first,{cookie:newCookie})).status,401);
  console.log('PASS: customer pages, CSRF, account lifecycle, code ownership, persistent reveals, protected downloads, audio ranges, previews, and all 54 printed QR redirects.');
-}catch(e){console.error(logs);throw e;}finally{server.kill();await exit;rmSync(temp,{recursive:true,force:true});}
+}catch(e){console.error(logs);throw e;}finally{server.kill();await exit;if(resolve(temp)!==temp||!temp.startsWith(join(tmpdir(),'rc-http-')))throw Error('Unexpected test directory');rmSync(temp,{recursive:true,force:true});}
