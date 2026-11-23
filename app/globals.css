@@ -1765,6 +1765,12 @@ main { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
   font-weight: 850;
   cursor: pointer;
 }
+.song-streaming { margin-block: 1.5rem; min-width: 0; }
+.song-streaming .actions { flex-wrap: wrap; }
+.song-streaming .streaming-frame { display: block; width: 100%; border: 0; border-radius: 12px; margin-block: 1rem; }
+.song-streaming .streaming-youtube { aspect-ratio: 16 / 9; height: auto; }
+.song-streaming .streaming-new-tab { font-size: .875rem; }
+.song-streaming button[aria-pressed="true"] { border-color: var(--gold); }
 .shop-admin-file-button:hover { border-color: var(--gold); color: var(--gold); }
 .shop-admin-file-button input { display: none; }
 .shop-admin-upload-button { width: 100%; }
