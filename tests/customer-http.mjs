@@ -7,7 +7,7 @@ import {randomBytes} from 'node:crypto';
 import {songs} from '../data/songs.js';
 import {qrRedirectEntries} from '../lib/qrRedirects.js';
 const temp=mkdtempSync(join(tmpdir(),'rc-http-')),port=3101,origin=`http://127.0.0.1:${port}`,key=randomBytes(32).toString('hex');
-const server=spawn(process.execPath,['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port',String(port)],{cwd:process.cwd(),env:{...process.env,NODE_ENV:'production',APP_ORIGIN:origin,OWNER_KEY:key,CUSTOMER_DB_PATH:join(temp,'test.sqlite'),MUSIC_DIR:resolve('private/music')},stdio:['ignore','pipe','pipe']});
+const server=spawn(process.execPath,['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port',String(port)],{cwd:process.cwd(),env:{...process.env,NODE_ENV:'production',SOCIAL_LOGIN_ENABLED:'0',CUSTOMER_STORAGE_READY:'0',APP_ORIGIN:origin,OWNER_KEY:key,CUSTOMER_DB_PATH:join(temp,'test.sqlite'),MUSIC_DIR:resolve('private/music')},stdio:['ignore','pipe','pipe']});
 let logs='';server.stdout.on('data',d=>logs+=d);server.stderr.on('data',d=>logs+=d);
 const exit=new Promise(r=>server.once('exit',r));
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
@@ -19,6 +19,9 @@ try{
  for(const path of ['/','/music','/collection','/account','/redeem','/help','/privacy','/owner','/playlist']){const r=await req(path);assert.equal(r.status,200,path);assert.match(await r.text(),/STV/);}
  assert.equal((await req('/playlist')).headers.get('permissions-policy'),'camera=(self), microphone=()');
  assert.equal((await req('/')).headers.get('permissions-policy'),'camera=(), microphone=()');
+ assert.deepEqual(await (await req('/api/social/providers')).json(),{providers:[]});
+ assert.equal((await req('/api/social/google/start',{method:'POST'})).status,503);
+ assert.match((await req('/account')).headers.get('content-security-policy'),/https:\/\/accounts.google.com/);
  const first=songs[0].slug,second=songs[1].slug;
  assert.equal((await req('/api/music/'+first)).status,401);
  assert.equal((await req('/media/royal-chaos/'+first+'.mp3')).status,404);
